@@ -118,6 +118,50 @@ const esportsEvents: EsportsEvent[] = [
     ],
     registrationOpen: true,
     image: "/images/esports/game4.jpg"
+  },
+  {
+    id: "event5",
+    title: "Rocket League Championship Series",
+    game: "Rocket League",
+    date: "November 5-7, 2024",
+    time: "3:00 PM - 9:00 PM EST",
+    registrationFee: 20,
+    prizePool: "$4,000",
+    maxParticipants: 32,
+    currentParticipants: 18,
+    description: "Join our Rocket League Championship Series and show off your car control, aerial skills, and teamwork. Teams of 3 will battle through a group stage and playoffs.",
+    rules: [
+      "3v3 team format",
+      "Group stage followed by single elimination playoffs",
+      "Teams must have at least one substitute player",
+      "Standard competitive settings",
+      "All players must use official tournament client",
+      "Double elimination bracket for playoffs"
+    ],
+    registrationOpen: true,
+    image: "/images/esports/game5.jpg"
+  },
+  {
+    id: "event6",
+    title: "Overwatch Invitational",
+    game: "Overwatch",
+    date: "December 12-13, 2024",
+    time: "1:00 PM - 8:00 PM EST",
+    registrationFee: 30,
+    prizePool: "$6,000",
+    maxParticipants: 24,
+    currentParticipants: 14,
+    description: "Compete in our seasonal Overwatch Invitational tournament! Teams of 6 will battle across multiple maps and game modes to determine the ultimate champion.",
+    rules: [
+      "6v6 team competition",
+      "Round robin group stage with top teams advancing to playoffs",
+      "All official competitive maps in rotation",
+      "Each match includes Control, Hybrid, Escort, and Assault maps",
+      "Teams must maintain consistent rosters throughout the tournament",
+      "Best-of-five format for semifinals and finals"
+    ],
+    registrationOpen: true,
+    image: "/images/esports/game6.jpg"
   }
 ];
 
@@ -278,15 +322,15 @@ export default function EsportsPage() {
             </motion.p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {esportsEvents.map((event, index) => (
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              {esportsEvents.slice(0, 3).map((event, index) => (
                 <motion.div
                   key={event.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 * (index % 3) }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
                   className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg flex flex-col h-full border border-transparent hover:border-blue-500 transition-colors"
                 >
                   <div className="relative h-48">
@@ -304,71 +348,70 @@ export default function EsportsPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="p-6 cursor-pointer" onClick={() => toggleEventDetails(event.id)}>
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-                      <div>
-                        <div className="flex items-center mb-2">
-                          <Trophy className="text-yellow-500 mr-2" size={20} />
-                          <h3 className="text-xl font-bold">{event.title}</h3>
+                  
+                  <div className="p-6 flex flex-col flex-grow">
+                    <div className="mb-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-sm font-semibold px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">
+                          {event.game}
+                        </span>
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                          {event.currentParticipants}/{event.maxParticipants} Teams
+                        </span>
+                      </div>
+                      
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="flex items-center space-x-2">
+                          <Calendar size={16} className="text-gray-500 dark:text-gray-400" />
+                          <span className="text-sm text-gray-600 dark:text-gray-400">{event.date}</span>
                         </div>
-                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm text-gray-600 dark:text-gray-400 mb-4">
-                          <div className="flex items-center">
-                            <span className="font-medium">{event.game}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <Calendar size={16} className="mr-1" />
-                            <span>{event.date}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <Clock size={16} className="mr-1" />
-                            <span>{event.time}</span>
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-4 text-sm">
-                          <div className="flex items-center">
-                            <DollarSign size={16} className="mr-1 text-green-500" />
-                            <span>Registration: ${event.registrationFee}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <Award size={16} className="mr-1 text-yellow-500" />
-                            <span>Prize Pool: {event.prizePool}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <Users size={16} className="mr-1 text-blue-500" />
-                            <span>
-                              Participants: {event.currentParticipants}/{event.maxParticipants}
-                            </span>
-                          </div>
+                        <div className="flex items-center space-x-2">
+                          <Clock size={16} className="text-gray-500 dark:text-gray-400" />
+                          <span className="text-sm text-gray-600 dark:text-gray-400">{event.time.split(' - ')[0]}</span>
                         </div>
                       </div>
-                      <div className="mt-4 md:mt-0 flex items-center gap-2">
-                        {event.registrationOpen ? (
-                          <button
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              openRegistrationForm(event);
-                            }}
-                          >
-                            Register Now
-                          </button>
-                        ) : (
-                          <span className="bg-gray-400 text-white px-4 py-2 rounded-lg">
-                            Registration Closed
-                          </span>
-                        )}
+                      
+                      <div className="flex justify-between items-center mb-5">
+                        <div className="flex items-center space-x-2">
+                          <DollarSign size={16} className="text-green-500" />
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">${event.registrationFee}</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Award size={16} className="text-yellow-500" />
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{event.prizePool}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-auto flex items-center justify-between">
+                      {event.registrationOpen ? (
+                        <button
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex-1 mr-2"
+                          onClick={() => openRegistrationForm(event)}
+                        >
+                          Register Now
+                        </button>
+                      ) : (
+                        <span className="bg-gray-400 text-white px-4 py-2 rounded-lg flex-1 text-center mr-2">
+                          Registration Closed
+                        </span>
+                      )}
+                      <button
+                        onClick={() => toggleEventDetails(event.id)}
+                        className="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors"
+                      >
                         {expandedEvent === event.id ? (
-                          <ChevronUp size={20} className="text-gray-500" />
+                          <ChevronUp size={20} className="text-gray-500 dark:text-gray-400" />
                         ) : (
-                          <ChevronDown size={20} className="text-gray-500" />
+                          <ChevronDown size={20} className="text-gray-500 dark:text-gray-400" />
                         )}
-                      </div>
+                      </button>
                     </div>
                   </div>
 
                   {expandedEvent === event.id && (
-                    <div className="px-6 pb-6 pt-2 border-t border-gray-200 dark:border-gray-700">
-                      <div className="mb-6">
+                    <div className="px-6 pb-6 border-t border-gray-200 dark:border-gray-700">
+                      <div className="py-4">
                         <h4 className="text-lg font-semibold mb-2">Event Description</h4>
                         <p className="text-gray-700 dark:text-gray-300">
                           {event.description}
@@ -388,10 +431,127 @@ export default function EsportsPage() {
                         <div className="mt-6 text-center">
                           <button
                             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              openRegistrationForm(event);
-                            }}
+                            onClick={() => openRegistrationForm(event)}
+                          >
+                            Register for This Tournament
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {esportsEvents.slice(3, 6).map((event, index) => (
+                <motion.div
+                  key={event.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg flex flex-col h-full border border-transparent hover:border-blue-500 transition-colors"
+                >
+                  <div className="relative h-48">
+                    <Image
+                      src={event.image}
+                      alt={`${event.game} tournament - ${event.title}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-4">
+                      <div>
+                        <span className="bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded">{event.game}</span>
+                        <h3 className="text-xl font-bold text-white mt-2">{event.title}</h3>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-6 flex flex-col flex-grow">
+                    <div className="mb-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-sm font-semibold px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">
+                          {event.game}
+                        </span>
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                          {event.currentParticipants}/{event.maxParticipants} Teams
+                        </span>
+                      </div>
+                      
+                      <div className="flex justify-between items-center mb-4">
+                        <div className="flex items-center space-x-2">
+                          <Calendar size={16} className="text-gray-500 dark:text-gray-400" />
+                          <span className="text-sm text-gray-600 dark:text-gray-400">{event.date}</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Clock size={16} className="text-gray-500 dark:text-gray-400" />
+                          <span className="text-sm text-gray-600 dark:text-gray-400">{event.time.split(' - ')[0]}</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex justify-between items-center mb-5">
+                        <div className="flex items-center space-x-2">
+                          <DollarSign size={16} className="text-green-500" />
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">${event.registrationFee}</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Award size={16} className="text-yellow-500" />
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{event.prizePool}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-auto flex items-center justify-between">
+                      {event.registrationOpen ? (
+                        <button
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex-1 mr-2"
+                          onClick={() => openRegistrationForm(event)}
+                        >
+                          Register Now
+                        </button>
+                      ) : (
+                        <span className="bg-gray-400 text-white px-4 py-2 rounded-lg flex-1 text-center mr-2">
+                          Registration Closed
+                        </span>
+                      )}
+                      <button
+                        onClick={() => toggleEventDetails(event.id)}
+                        className="p-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors"
+                      >
+                        {expandedEvent === event.id ? (
+                          <ChevronUp size={20} className="text-gray-500 dark:text-gray-400" />
+                        ) : (
+                          <ChevronDown size={20} className="text-gray-500 dark:text-gray-400" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  {expandedEvent === event.id && (
+                    <div className="px-6 pb-6 border-t border-gray-200 dark:border-gray-700">
+                      <div className="py-4">
+                        <h4 className="text-lg font-semibold mb-2">Event Description</h4>
+                        <p className="text-gray-700 dark:text-gray-300">
+                          {event.description}
+                        </p>
+                      </div>
+
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold mb-2">Tournament Rules</h4>
+                        <ul className="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-300">
+                          {event.rules.map((rule, index) => (
+                            <li key={index}>{rule}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {event.registrationOpen && (
+                        <div className="mt-6 text-center">
+                          <button
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
+                            onClick={() => openRegistrationForm(event)}
                           >
                             Register for This Tournament
                           </button>
@@ -599,12 +759,32 @@ export default function EsportsPage() {
                       </thead>
                       <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                         {matches.map((match) => (
-                          <tr key={match.id} className="hover:bg-gray-100 dark:hover:bg-gray-750">
+                          <tr key={match.id} className="hover:bg-gray-100 dark:hover:bg-gray-700">
                             <td className="py-4 px-4">#{match.id}</td>
                             <td className="py-4 px-4">
-                              <div className="font-medium">{match.team1}</div>
-                              <div className="text-sm text-gray-500 dark:text-gray-400">vs</div>
-                              <div className="font-medium">{match.team2}</div>
+                              <div className="flex items-center mb-2">
+                                <div className="relative w-8 h-8 rounded-full overflow-hidden mr-3">
+                                  <Image 
+                                    src={`/images/esports/team${match.id}.jpg`}
+                                    alt={match.team1}
+                                    fill
+                                    className="object-cover"
+                                  />
+                                </div>
+                                <div className="font-medium">{match.team1}</div>
+                              </div>
+                              <div className="text-sm text-gray-500 dark:text-gray-400 my-1 text-center">vs</div>
+                              <div className="flex items-center mt-2">
+                                <div className="relative w-8 h-8 rounded-full overflow-hidden mr-3">
+                                  <Image 
+                                    src={match.id <= 4 ? `/images/esports/team${match.id === 1 ? 2 : match.id === 2 ? 1 : match.id === 3 ? 4 : 3}.jpg` : "/images/esports/game1.jpg"}
+                                    alt={match.team2}
+                                    fill
+                                    className="object-cover"
+                                  />
+                                </div>
+                                <div className="font-medium">{match.team2}</div>
+                              </div>
                             </td>
                             <td className="py-4 px-4">
                               <div>{match.date}</div>
@@ -659,9 +839,21 @@ export default function EsportsPage() {
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                       {leaderboard.map((team) => (
-                        <tr key={team.rank} className="hover:bg-gray-100 dark:hover:bg-gray-750">
+                        <tr key={team.rank} className="hover:bg-gray-100 dark:hover:bg-gray-700">
                           <td className="py-4 px-4 font-medium">{team.rank}</td>
-                          <td className="py-4 px-4 font-medium">{team.team}</td>
+                          <td className="py-4 px-4">
+                            <div className="flex items-center">
+                              <div className="relative w-8 h-8 rounded-full overflow-hidden mr-3">
+                                <Image 
+                                  src={team.rank <= 4 ? `/images/esports/team${team.rank}.jpg` : "/images/esports/game1.jpg"}
+                                  alt={team.team}
+                                  fill
+                                  className="object-cover"
+                                />
+                              </div>
+                              <span className="font-medium">{team.team}</span>
+                            </div>
+                          </td>
                           <td className="py-4 px-4 text-center">{team.wins}</td>
                           <td className="py-4 px-4 text-center">{team.losses}</td>
                           <td className="py-4 px-4 text-center font-semibold">{team.points}</td>
