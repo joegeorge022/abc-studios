@@ -218,7 +218,11 @@ export default function BlogPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 * (index % 3) }}
-                  className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md flex flex-col h-full"
+                  whileHover={{ 
+                    y: -8,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full border border-transparent hover:border-blue-200 dark:hover:border-blue-800"
                 >
                   <div className="h-48 relative">
                     <Image
@@ -228,6 +232,11 @@ export default function BlogPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover"
                     />
+                    <div className="absolute top-4 left-4">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-600/80 text-white backdrop-blur-sm">
+                        {post.category}
+                      </span>
+                    </div>
                   </div>
                   <div className="p-6 flex-grow">
                     <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
@@ -252,19 +261,18 @@ export default function BlogPage() {
                     </p>
                     
                     <div className="mt-auto flex justify-between items-center">
-                      <Link href={`/blog/${post.slug}`} className="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center hover:underline">
-                        Read more <ChevronRight size={16} className="ml-1" />
+                      <Link href={`/blog/${post.slug}`} className="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center group">
+                        <span className="group-hover:underline">Read more</span>
+                        <motion.span
+                          initial={{ x: 0 }}
+                          whileHover={{ x: 4 }}
+                          className="ml-1"
+                        >
+                          <ChevronRight size={16} />
+                        </motion.span>
                       </Link>
                       
                       <span className="text-sm text-gray-500 dark:text-gray-400">{post.readTime}</span>
-                    </div>
-                  </div>
-                  <div className="px-6 py-3 border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-850">
-                    <div className="flex items-center">
-                      <Tag size={14} className="mr-2 text-gray-400" />
-                      <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                        {post.category}
-                      </span>
                     </div>
                   </div>
                 </motion.article>
