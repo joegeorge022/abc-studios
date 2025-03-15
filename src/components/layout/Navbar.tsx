@@ -31,11 +31,11 @@ export default function Navbar() {
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/95 dark:bg-black/95 shadow-md backdrop-blur-sm" : "bg-transparent"}`}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <div className="w-10 h-10 md:w-12 md:h-12 relative">
+              <div className="w-8 h-8 md:w-12 md:h-12 relative">
                 <Image
                   src="/logo.svg"
                   alt="ABC Studios Logo"
@@ -43,7 +43,7 @@ export default function Navbar() {
                   className="object-contain"
                 />
               </div>
-              <span className={`ml-2 text-lg md:text-xl font-bold tracking-tight ${scrolled ? 'text-gray-900 dark:text-white' : 'text-white'}`}>Studios</span>
+              <span className={`ml-2 text-base md:text-xl font-bold tracking-tight ${scrolled ? 'text-gray-900 dark:text-white' : 'text-white'}`}>Studios</span>
             </Link>
           </div>
           
@@ -60,23 +60,22 @@ export default function Navbar() {
           </nav>
           
           <button
-            className="md:hidden p-2 text-white flex items-center justify-center w-10 h-10 focus:outline-none focus:ring-2 focus:ring-white/20 rounded-md"
+            className="md:hidden p-2 text-white flex items-center justify-center w-8 h-8 focus:outline-none focus:ring-2 focus:ring-white/20 rounded-md mr-1"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.2 }}
-          className="md:hidden bg-white dark:bg-gray-900 shadow-xl"
+          className="md:hidden bg-white dark:bg-gray-900 shadow-xl max-w-full"
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navLinks.map((link) => (

@@ -15,7 +15,8 @@
 
 html {
   font-size: 100%;
-
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,4 +30,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }

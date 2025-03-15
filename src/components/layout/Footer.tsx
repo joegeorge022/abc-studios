@@ -13,8 +13,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 pt-12 md:pt-16 pb-6 md:pb-8">
+    <footer className="bg-gray-900 text-white overflow-hidden w-full">
+      <div className="container mx-auto px-4 pt-12 md:pt-16 pb-6 md:pb-8 overflow-hidden">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg md:text-xl font-bold mb-4">ABC Studios</h3>

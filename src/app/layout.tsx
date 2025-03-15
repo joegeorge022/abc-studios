@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
   ],
-  viewport: 'width=device-width, initial-scale=1',
+  viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -64,9 +64,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden w-full`}>
         <Navbar />
-        <main className="min-h-screen">
+        <main className="min-h-screen overflow-x-hidden w-full">
           {children}
         </main>
         <Footer />
