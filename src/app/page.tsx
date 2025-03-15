@@ -119,7 +119,7 @@ export default function Home() {
           
           {/* Scroll down indicator */}
           <motion.div 
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white flex flex-col items-center"
+            className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white flex flex-col items-center"
             initial={{ opacity: 0 }}
             animate={{ 
               opacity: 1,
@@ -138,8 +138,9 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Scrolling Text Animation */}
-      <section className="bg-black py-16 overflow-hidden relative">
+      <div className="h-24 bg-gradient-to-b from-black/95 to-black"></div>
+      
+      <section className="bg-black pt-16 pb-16 overflow-hidden relative">
         {/* Animated background particles/dots */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-blue-500"></div>

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Send, X, MessageSquare, ChevronRight, Calendar, Film, BarChart, Users, Phone, Gamepad, Info, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import React from 'react';
 
 type Message = {
   role: 'user' | 'assistant';
@@ -148,7 +149,7 @@ export default function AIChatAssistant() {
             if (isInternalLink) {
               const path = url.split('abc-studios.vercel.app')[1];
               return (
-                <>
+                <React.Fragment key={index}>
                   {part}
                   <Link 
                     href={path} 
@@ -158,11 +159,11 @@ export default function AIChatAssistant() {
                     {url}
                     <ExternalLink size={12} className="ml-1" />
                   </Link>
-                </>
+                </React.Fragment>
               );
             } else {
               return (
-                <>
+                <React.Fragment key={index}>
                   {part}
                   <a 
                     href={url} 
@@ -173,16 +174,11 @@ export default function AIChatAssistant() {
                     {url}
                     <ExternalLink size={12} className="ml-1" />
                   </a>
-                </>
+                </React.Fragment>
               );
             }
           }
-          
-          if (index === parts.length - 1) {
-            return part;
-          }
-          
-          return null;
+          return <React.Fragment key={index}>{part}</React.Fragment>;
         })}
       </p>
     );
