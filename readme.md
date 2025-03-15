@@ -1,10 +1,68 @@
 # ABC-studios
 
+**Live Site: [https://abc-studios.vercel.app/](https://abc-studios.vercel.app/)**
+
+## Project Documentation
+
+### Technologies Used
+
+- **Frontend Framework**: Next.js 14 with App Router
+- **Styling**: TailwindCSS with custom theme
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Authentication for admin section
+- **Deployment**: Vercel
+- **External APIs**: YouTube Data API for live esports streaming
+
+### Design Decisions and Rationale
+
+1. **Modern UI/UX Approach**:
+   - Dark-themed interface with vibrant accents for a premium, professional look
+   - Responsive design that adapts to all device sizes
+   - Strategic use of animations to enhance user engagement without affecting performance
+
+2. **Component Architecture**:
+   - Modular component structure for maintainability and reusability
+   - Consistent visual language across all pages
+   - Custom avatar system using initials and color-coding for user identification
+
+3. **Performance Optimizations**:
+   - Image optimization using Next.js Image component
+   - Lazy loading of off-screen content
+   - Client-side API data caching
+   - Reduced API calls for YouTube data to avoid quota limitations
+
+4. **Accessibility Features**:
+   - High contrast color schemes
+   - Semantic HTML structure
+   - Keyboard navigation support
+   - Screen reader compatible components
+
+### Known Limitations and Unfinished Features
+
+1. **API Limitations**:
+   - YouTube Data API has quota restrictions that limit live stream fetching.
+   - Currently using fallback content when API limits are reached.
+   
+2. **Features In Progress**:
+   - User authentication system for esports event registration
+   - Payment processing integration for tournament registration. (None of the team member's don't have a pancard to implement this feature.)
+   - Matchmaking system between registered participants
+   - Multi-language support functionality
+
+3. **Future Enhancements Planned**:
+   - Enhanced AI chat assistant capabilities
+   - Enhanced animations using Framer Motion
+   - Social media auto-posting for new blog posts or esports events
+   - Expanded admin dashboard with analytics
+   - Real-time leaderboard for esports tournaments
+
 ## Objective
 
 Design and develop a fully functional and visually appealing website for a fictional company, "ABC
 Studios", which specializes in live streaming, media production, digital marketing, event
-management services and Esports services. The website should highlight the company’s services,
+management services and Esports services. The website should highlight the company's services,
 showcase its portfolio, include a blog section, and provide an intuitive user experience to attract
 potential clients.
 
@@ -16,7 +74,7 @@ potential clients.
 Services."
 - Feature a banner or carousel highlighting key services and achevements.
 2. About Us Page
-- Provide detailed information about the company’s background, vision, mission, and core values.
+- Provide detailed information about the company's background, vision, mission, and core values.
 - Include a brief introduction to the team, with placeholder images and names for team members.
 3. Services Page
 - Detail the four primary services offered:
@@ -42,7 +100,7 @@ planning tips, or behind-the-scenes stories.
  - Email Address
  - Phone Number
  - Message
-- Display the company’s email address and phone number prominently.
+- Display the company's email address and phone number prominently.
 - Add a map section showing the fictional company's location.
 7. Join Us Page
 - Create a page where admins can post job offers and users can use those job cards to apply, or users
