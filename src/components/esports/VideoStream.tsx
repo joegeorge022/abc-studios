@@ -477,7 +477,7 @@ export default function VideoStream() {
     }
   };
 
-  const renderUserAvatar = (name: string, color: string, size = 'w-8 h-8') => {
+  const renderUserAvatar = (name: string, color: string, size = 'w-10 h-10') => {
     const initials = getInitials(name);
     
     return (
@@ -595,19 +595,19 @@ export default function VideoStream() {
             >
               <div className="p-1 bg-gray-750 border-b border-gray-700 flex-shrink-0">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-white font-medium text-sm">Live Chat</h3>
-                  <div className="text-gray-400 text-xs">{onlineUsers.filter(u => u.isOnline).length} online</div>
+                  <h3 className="text-white font-medium text-base">Live Chat</h3>
+                  <div className="text-gray-400 text-sm">{onlineUsers.filter(u => u.isOnline).length} online</div>
                 </div>
                 
                 <div className="flex border-b border-gray-700 -mx-3 px-1">
                   <button 
-                    className={`px-3 py-0.5 text-xs ${chatTab === 'chat' ? 'text-blue-400 border-b-2 border-blue-400' : 'text-gray-400 hover:text-gray-300'}`}
+                    className={`px-3 py-0.5 text-sm ${chatTab === 'chat' ? 'text-blue-400 border-b-2 border-blue-400' : 'text-gray-400 hover:text-gray-300'}`}
                     onClick={() => setChatTab('chat')}
                   >
                     Chat
                   </button>
                   <button 
-                    className={`px-3 py-0.5 text-xs ${chatTab === 'users' ? 'text-blue-400 border-b-2 border-blue-400' : 'text-gray-400 hover:text-gray-300'}`}
+                    className={`px-3 py-0.5 text-sm ${chatTab === 'users' ? 'text-blue-400 border-b-2 border-blue-400' : 'text-gray-400 hover:text-gray-300'}`}
                     onClick={() => setChatTab('users')}
                   >
                     Viewers
@@ -617,7 +617,7 @@ export default function VideoStream() {
               
               <div 
                 ref={chatContainerRef}
-                className="flex-1 p-2 overflow-y-auto scrollbar-thin"
+                className="flex-1 p-3 overflow-y-auto scrollbar-thin"
                 style={{ 
                   height: "calc(100% - 66px)", 
                   overflowY: "auto",
@@ -625,7 +625,7 @@ export default function VideoStream() {
                 }}
               >
                 {chatTab === 'chat' ? (
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {chatMessages.map((msg) => (
                       <motion.div 
                         key={msg.id} 
@@ -633,11 +633,11 @@ export default function VideoStream() {
                         animate={{ opacity: 1, y: 0 }}
                         className="group"
                       >
-                        <div className="flex items-start gap-2">
+                        <div className="flex items-start gap-3">
                           {renderUserAvatar(msg.user, msg.color || getUserTypeBaseColor(msg.userType))}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-1">
-                              <span className={`font-semibold text-xs ${getUserTypeColor(msg.userType)}`}>
+                              <span className={`font-semibold text-sm ${getUserTypeColor(msg.userType)}`}>
                                 {msg.user}
                               </span>
                               <span className="ml-1">{getUserTypeIcon(msg.userType)}</span>
@@ -645,7 +645,7 @@ export default function VideoStream() {
                                 {msg.timestamp}
                               </span>
                             </div>
-                            <p className="text-gray-200 text-xs break-words">{msg.message}</p>
+                            <p className="text-gray-200 text-sm break-words leading-tight">{msg.message}</p>
                           </div>
                         </div>
                       </motion.div>
@@ -657,42 +657,42 @@ export default function VideoStream() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className="flex items-center gap-1 text-gray-400 text-xs"
+                          className="flex items-center gap-2 text-gray-400 text-sm"
                         >
-                          <div className="flex space-x-0.5 ml-8">
-                            <div className="w-1 h-1 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: "0ms" }}></div>
-                            <div className="w-1 h-1 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: "150ms" }}></div>
-                            <div className="w-1 h-1 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: "300ms" }}></div>
+                          <div className="flex space-x-1 ml-10">
+                            <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: "0ms" }}></div>
+                            <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: "150ms" }}></div>
+                            <div className="w-2 h-2 rounded-full bg-gray-500 animate-bounce" style={{ animationDelay: "300ms" }}></div>
                           </div>
-                          <span className="text-xs">Someone is typing...</span>
+                          <span className="text-sm">Someone is typing...</span>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
                 ) : (
-                  <div className="space-y-1">
+                  <div className="space-y-2">
                     {onlineUsers.map((user, index) => (
                       <motion.div 
                         key={index}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.05 }}
-                        className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-gray-700"
+                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700"
                       >
                         <div className="relative">
-                          {renderUserAvatar(user.name, user.color, 'w-8 h-8')}
+                          {renderUserAvatar(user.name, user.color, 'w-10 h-10')}
                           {user.isOnline && (
-                            <div className="absolute bottom-0 right-0 w-2 h-2 bg-green-500 rounded-full border-2 border-gray-800"></div>
+                            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-800"></div>
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-1">
-                            <span className={`font-medium text-xs ${getUserTypeColor(user.type)}`}>
+                            <span className={`font-medium text-sm ${getUserTypeColor(user.type)}`}>
                               {user.name}
                             </span>
                             {getUserTypeIcon(user.type)}
                           </div>
-                          <p className="text-gray-400 text-xs">
+                          <p className="text-gray-400 text-sm">
                             {user.isOnline ? "Online" : "Offline"}
                           </p>
                         </div>
@@ -703,8 +703,8 @@ export default function VideoStream() {
               </div>
               
               {chatTab === 'chat' && (
-                <form onSubmit={handleMessageSubmit} className="relative p-1 border-t border-gray-700 flex-shrink-0">
-                  <div className="flex items-center gap-1">
+                <form onSubmit={handleMessageSubmit} className="relative p-2 border-t border-gray-700 flex-shrink-0">
+                  <div className="flex items-center gap-2">
                     <div className="flex-1 relative">
                       <input
                         ref={messageInputRef}
@@ -712,14 +712,14 @@ export default function VideoStream() {
                         value={newMessage}
                         onChange={handleInputChange}
                         placeholder="Send a message..."
-                        className="w-full bg-gray-700 border border-gray-600 rounded-lg pl-2 pr-6 py-0.5 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 text-xs"
+                        className="w-full bg-gray-700 border border-gray-600 rounded-lg pl-3 pr-8 py-1.5 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500 text-sm"
                       />
                       <button
                         type="button"
                         onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                        className="absolute right-1.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
+                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
                       >
-                        <Smile size={14} />
+                        <Smile size={18} />
                       </button>
                       
                       {showEmojiPicker && (
@@ -727,15 +727,15 @@ export default function VideoStream() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
-                          className="absolute bottom-full right-0 mb-1 p-1 bg-gray-700 rounded-lg border border-gray-600 shadow-lg"
+                          className="absolute bottom-full right-0 mb-1 p-2 bg-gray-700 rounded-lg border border-gray-600 shadow-lg"
                         >
-                          <div className="grid grid-cols-5 gap-0.5">
+                          <div className="grid grid-cols-5 gap-1">
                             {emojiOptions.map((emoji, index) => (
                               <button
                                 key={index}
                                 type="button"
                                 onClick={() => addEmoji(emoji)}
-                                className="text-xs hover:bg-gray-600 w-5 h-5 flex items-center justify-center rounded"
+                                className="text-base hover:bg-gray-600 w-8 h-8 flex items-center justify-center rounded"
                               >
                                 {emoji}
                               </button>
@@ -747,9 +747,9 @@ export default function VideoStream() {
                     <button
                       type="submit"
                       disabled={!newMessage.trim()}
-                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800/50 disabled:text-blue-100/50 text-white rounded-lg p-1 transition-colors"
+                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800/50 disabled:text-blue-100/50 text-white rounded-lg p-1.5 transition-colors"
                     >
-                      <Send size={16} />
+                      <Send size={20} />
                     </button>
                   </div>
                 </form>
