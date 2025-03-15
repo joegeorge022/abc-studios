@@ -13,11 +13,14 @@ import {
   ChevronDown, 
   ChevronUp,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
+  User,
+  Clock3
 } from "lucide-react";
 import Image from "next/image";
 import { Metadata } from "next";
 import { submitEsportsRegistration } from "../../utils/supabase";
+import VideoStream from '@/components/esports/VideoStream';
 
 type EsportsEvent = {
   id: string;
@@ -227,7 +230,6 @@ export default function EsportsPage() {
       return;
     }
     
-    // Validate all participants have names
     const filledParticipants = formData.participants.filter(p => p.trim() !== "");
     if (filledParticipants.length < 2) {
       setError("Please add at least 2 team members");
@@ -244,7 +246,7 @@ export default function EsportsPage() {
         captain_email: formData.email,
         captain_phone: formData.phone,
         participants: formData.participants.filter(p => p.trim() !== ""),
-        payment_status: "pending" // In a real app, you would handle payment processing
+        payment_status: "pending"
       };
       
       const { error } = await submitEsportsRegistration(registrationData);
@@ -261,7 +263,6 @@ export default function EsportsPage() {
         agreeToRules: false
       });
       
-      // Reset after a while
       setTimeout(() => {
         setIsSubmitted(false);
         setRegistrationEvent(null);
@@ -335,6 +336,9 @@ export default function EsportsPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Video Streaming Section */}
+      <VideoStream />
 
       {/* Upcoming Events */}
       <section id="upcoming-events" className="py-16 bg-white dark:bg-black">
