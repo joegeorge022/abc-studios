@@ -446,9 +446,7 @@ export default function Home() {
       
       {/* Esports Section */}
       <section className="py-24 relative overflow-hidden">
-        {/* Background gradient with animated background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-purple-900">
-          {/* Animated grid pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-blue-900 to-purple-950">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{ 
               backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
@@ -457,10 +455,10 @@ export default function Home() {
           </div>
           
           {/* Animated dots/particles */}
-          <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-blue-400 opacity-20 animate-pulse"></div>
-          <div className="absolute top-3/4 left-1/2 w-6 h-6 rounded-full bg-purple-400 opacity-20 animate-pulse" style={{ animationDelay: "1s" }}></div>
-          <div className="absolute top-2/4 left-3/4 w-3 h-3 rounded-full bg-yellow-400 opacity-30 animate-pulse" style={{ animationDelay: "1.5s" }}></div>
-          <div className="absolute top-1/3 left-2/3 w-5 h-5 rounded-full bg-blue-300 opacity-20 animate-pulse" style={{ animationDelay: "0.5s" }}></div>
+          <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-cyan-400 opacity-30 animate-pulse"></div>
+          <div className="absolute top-3/4 left-1/2 w-6 h-6 rounded-full bg-violet-400 opacity-30 animate-pulse" style={{ animationDelay: "1s" }}></div>
+          <div className="absolute top-2/4 left-3/4 w-3 h-3 rounded-full bg-blue-400 opacity-40 animate-pulse" style={{ animationDelay: "1.5s" }}></div>
+          <div className="absolute top-1/3 left-2/3 w-5 h-5 rounded-full bg-indigo-300 opacity-30 animate-pulse" style={{ animationDelay: "0.5s" }}></div>
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -473,9 +471,9 @@ export default function Home() {
               className="text-white"
             >
               <motion.div 
-                className="bg-white/10 p-4 rounded-full w-fit mb-8 backdrop-blur-sm"
+                className="bg-gradient-to-r from-indigo-500/20 to-purple-500/20 p-4 rounded-xl w-fit mb-8 backdrop-blur-sm border border-indigo-500/30"
                 animate={{ 
-                  boxShadow: ["0 0 0 0 rgba(255, 211, 68, 0.5)", "0 0 0 10px rgba(255, 211, 68, 0)"],
+                  boxShadow: ["0 0 0 0 rgba(99, 102, 241, 0.4)", "0 0 0 10px rgba(99, 102, 241, 0)"],
                 }}
                 transition={{
                   duration: 2,
@@ -483,11 +481,11 @@ export default function Home() {
                   repeatType: "loop"
                 }}
               >
-                <Trophy className="text-yellow-400" size={36} />
+                <Trophy className="text-indigo-400" size={36} />
               </motion.div>
               
               <motion.h2 
-                className="text-4xl md:text-5xl font-bold mb-6"
+                className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-indigo-200"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -515,14 +513,16 @@ export default function Home() {
                 ].map((item, index) => (
                   <motion.div 
                     key={index}
-                    className="flex items-start bg-white/5 p-4 rounded-lg backdrop-blur-sm"
+                    className="flex items-start bg-gradient-to-r from-indigo-500/10 to-purple-500/10 p-4 rounded-lg backdrop-blur-sm border border-indigo-500/20"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                    whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+                    whileHover={{ backgroundColor: "rgba(99, 102, 241, 0.15)", scale: 1.02 }}
                   >
-                    <ChevronRight className="mt-0.5 mr-3 text-yellow-400" />
+                    <div className="bg-indigo-500/20 p-1.5 rounded-full mr-3 text-indigo-300">
+                      <ChevronRight size={16} />
+                    </div>
                     <span className="text-lg">{item}</span>
                   </motion.div>
                 ))}
@@ -538,9 +538,13 @@ export default function Home() {
               >
                 <Link 
                   href="/esports" 
-                  className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-8 py-4 rounded-full inline-flex items-center font-semibold text-lg transition-all hover:shadow-lg hover:shadow-yellow-500/20"
+                  className="relative overflow-hidden group bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-lg inline-flex items-center font-semibold text-lg transition-all hover:shadow-lg hover:shadow-indigo-500/30"
                 >
-                  Explore Esports <ChevronRight className="ml-2" size={18} />
+                  <span className="relative z-10">Explore Esports</span>
+                  <span className="relative z-10 ml-2 group-hover:translate-x-1 transition-transform">
+                    <ChevronRight size={18} />
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-indigo-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 </Link>
               </motion.div>
             </motion.div>
@@ -552,18 +556,18 @@ export default function Home() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-900/40 border border-white/10">
-          <Image
+              <div className="relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-900/40 border border-indigo-500/20">
+                <Image
                   src="/esports.jpg"
                   alt="Esports Event"
                   width={600}
                   height={400}
                   className="w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-indigo-950/90 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                   <div className="flex items-center mb-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse mr-2"></div>
+                    <div className="w-3 h-3 rounded-full bg-indigo-500 animate-pulse mr-2"></div>
                     <span className="text-sm font-semibold">LIVE TOURNAMENTS</span>
                   </div>
                   <h3 className="text-2xl font-bold mb-1">Championship Series</h3>
@@ -572,8 +576,8 @@ export default function Home() {
               </div>
               
               {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-yellow-400 to-yellow-600 opacity-30 rounded-full blur-xl z-0"></div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-600 opacity-30 rounded-full blur-xl z-0"></div>
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-indigo-400 to-purple-600 opacity-30 rounded-full blur-xl z-0"></div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-br from-blue-400 to-indigo-600 opacity-30 rounded-full blur-xl z-0"></div>
             </motion.div>
           </div>
         </div>
