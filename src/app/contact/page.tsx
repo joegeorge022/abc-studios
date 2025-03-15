@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, Check } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Check, AlertCircle } from "lucide-react";
 import Image from "next/image";
+import { submitContactForm } from "../../utils/supabase";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -15,18 +16,25 @@ export default function ContactPage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormState(prev => ({ ...prev, [name]: value }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const { error } = await submitContactForm(formState);
+      
+      if (error) {
+        throw new Error(error.message);
+      }
+      
       setIsSubmitted(true);
       setFormState({
         name: "",
@@ -38,7 +46,11 @@ export default function ContactPage() {
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
-    }, 1500);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unknown error occurred");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -160,22 +172,27 @@ export default function ContactPage() {
                 
                 {isSubmitted ? (
                   <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="bg-green-100 dark:bg-green-900/30 p-4 rounded-lg text-center mb-6"
+                    initial={{ opacity: 0, y: 10 }} 
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center py-16"
                   >
-                    <div className="flex justify-center mb-2">
-                      <Check className="text-green-600 dark:text-green-400" size={32} />
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-500 mb-6">
+                      <Check size={32} />
                     </div>
-                    <h3 className="text-lg font-semibold text-green-700 dark:text-green-400 mb-1">
-                      Message Sent Successfully!
-                    </h3>
-                    <p className="text-green-600 dark:text-green-300">
-                      We'll get back to you as soon as possible.
+                    <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Your message has been received. We'll get back to you shortly.
                     </p>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    {error && (
+                      <div className="bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 p-4 rounded-lg mb-6 flex items-start">
+                        <AlertCircle className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0" />
+                        <p>{error}</p>
+                      </div>
+                    )}
+                    
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Full Name*

@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Briefcase, MapPin, Clock, ChevronDown, ChevronUp, Send, Check, File } from "lucide-react";
+import { Briefcase, MapPin, Clock, ChevronDown, ChevronUp, Send, Check, File, User, Mail, Phone, AlertCircle } from "lucide-react";
 import Image from "next/image";
+import { submitCareerApplication } from "../../utils/supabase";
 
 type JobPosting = {
   id: string;
@@ -128,6 +129,7 @@ export default function CareersPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const toggleJobDetails = (jobId: string) => {
     if (expandedJob === jobId) {
@@ -157,27 +159,61 @@ export default function CareersPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
-    setTimeout(() => {
+    if (!selectedJobId) {
+      setError("No job selected");
       setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      // In a real app, you would upload the resume file to storage
+      // and get a URL to store in the database
+      // For simplicity, we're skipping that step here
+      
+      const selectedJob = jobPostings.find(job => job.id === selectedJobId);
+      if (!selectedJob) {
+        throw new Error("Selected job not found");
+      }
+
+      const applicationData = {
+        job_id: selectedJobId,
+        job_title: selectedJob.title,
+        full_name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        cover_letter: formData.coverLetter,
+        // In a real app, this would be the URL from storage
+        resume_url: formData.resumeFile ? 'sample-resume-url.pdf' : undefined
+      };
+      
+      const { error } = await submitCareerApplication(applicationData);
+      
+      if (error) throw new Error(error.message);
+      
       setIsSubmitted(true);
       setFormData({
         name: "",
         email: "",
         phone: "",
-        resumeFile: null,
         coverLetter: "",
+        resumeFile: null
       });
-
+      
+      // Reset after a while
       setTimeout(() => {
         setIsSubmitted(false);
         setApplicationFormVisible(false);
-        setSelectedJobId(null);
       }, 5000);
-    }, 1500);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unknown error occurred");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const selectedJob = jobPostings.find(job => job.id === selectedJobId);
@@ -419,14 +455,14 @@ export default function CareersPage() {
 
       {/* Application Form */}
       {applicationFormVisible && (
-        <section id="application-form" className="py-16 bg-white dark:bg-black">
+        <section id="application-form" className="py-12 md:py-16 bg-gray-50 dark:bg-gray-900">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-md"
+                className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md"
               >
                 <h2 className="text-2xl font-bold mb-6">
                   Apply for: {selectedJob?.title}
@@ -445,11 +481,20 @@ export default function CareersPage() {
                       Application Submitted Successfully!
                     </h3>
                     <p className="text-green-600 dark:text-green-300 mb-4">
-                      Thank you for applying to ABC Studios. We'll review your application and contact you soon.
+                      Your application has been received. We'll review it and contact you if there's a match!
+                    </p>
+                    <p className="text-green-600 dark:text-green-300">
+                      You'll be redirected to the job listings shortly.
                     </p>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    {error && (
+                      <div className="bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 p-4 rounded-lg mb-6 flex items-start">
+                        <AlertCircle className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0" />
+                        <p>{error}</p>
+                      </div>
+                    )}
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Full Name*

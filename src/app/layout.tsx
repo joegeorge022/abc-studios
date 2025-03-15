@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://abc-studios.com',
+    url: 'https://abc-studios.vercel.app/',
     siteName: 'ABC Studios',
     title: 'ABC Studios - Live Streaming, Media Production & Digital Marketing',
     description: 'Professional live streaming, media production, and digital marketing services for your business.',

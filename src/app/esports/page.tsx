@@ -12,9 +12,12 @@ import {
   MessageSquare, 
   ChevronDown, 
   ChevronUp,
-  CheckCircle
+  CheckCircle,
+  AlertCircle
 } from "lucide-react";
 import Image from "next/image";
+import { Metadata } from "next";
+import { submitEsportsRegistration } from "../../utils/supabase";
 
 type EsportsEvent = {
   id: string;
@@ -180,6 +183,7 @@ export default function EsportsPage() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const toggleEventDetails = (eventId: string) => {
     if (expandedEvent === eventId) {
@@ -212,28 +216,62 @@ export default function EsportsPage() {
     setFormData(prev => ({ ...prev, participants: newParticipants }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
-    setTimeout(() => {
+    if (!registrationEvent) {
+      setError("No event selected");
       setIsSubmitting(false);
+      return;
+    }
+    
+    // Validate all participants have names
+    const filledParticipants = formData.participants.filter(p => p.trim() !== "");
+    if (filledParticipants.length < 2) {
+      setError("Please add at least 2 team members");
+      setIsSubmitting(false);
+      return;
+    }
+    
+    try {
+      const registrationData = {
+        event_id: registrationEvent.id,
+        event_title: registrationEvent.title,
+        team_name: formData.teamName,
+        captain_name: formData.captainName,
+        captain_email: formData.email,
+        captain_phone: formData.phone,
+        participants: formData.participants.filter(p => p.trim() !== ""),
+        payment_status: "pending" // In a real app, you would handle payment processing
+      };
+      
+      const { error } = await submitEsportsRegistration(registrationData);
+      
+      if (error) throw new Error(error.message);
+      
       setIsSubmitted(true);
       setFormData({
         teamName: "",
         captainName: "",
         email: "",
         phone: "",
-        participants: ["", "", "", "", ""],
+        participants: ["", "", "", ""],
         agreeToRules: false
       });
       
+      // Reset after a while
       setTimeout(() => {
         setIsSubmitted(false);
         setRegistrationEvent(null);
         document.getElementById("matchmaking")?.scrollIntoView({ behavior: "smooth" });
       }, 5000);
-    }, 1500);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unknown error occurred");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const matches = [
@@ -602,6 +640,12 @@ export default function EsportsPage() {
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+                    {error && (
+                      <div className="bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 p-4 rounded-lg mb-6 flex items-start">
+                        <AlertCircle className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0" />
+                        <p>{error}</p>
+                      </div>
+                    )}
                     <div>
                       <label htmlFor="teamName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Team Name*
