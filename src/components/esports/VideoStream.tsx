@@ -70,28 +70,28 @@ const defaultStreams: Stream[] = [
   },
   {
     id: "stream3",
-    title: "LIVE GIVING ROCKET LEAGUE CREDITS OR FENNECS",
-    game: "Rocket League",
+    title: "LIVE | MPL LATAM Season 3 MLBB | Swiss Stage - Day 1",
+    game: "League of Legends",
     viewers: 25137,
-    streamer: "RocketLeagueOfficial",
+    streamer: "LeagueOfLegends",
     thumbnailUrl: "/images/esports/game3.jpg",
     videoUrl: "https://www.youtube.com/embed/YrEQJ6Qy5a4?autoplay=0",
   },
   {
     id: "stream4",
-    title: "LIVE | MPL LATAM Season 3 MLBB | Swiss Stage - Day 1",
-    game: "League of Legends",
+    title: "Gameplay de CS2 no PREMIER // LIVE de CS2",
+    game: "Call of Duty Warzone",
     viewers: 154,
-    streamer: "LeagueOfLegends",
+    streamer: "CallOfDutyLeague",
     thumbnailUrl: "/images/esports/game4.jpg",
     videoUrl: "https://www.youtube.com/embed/xhYQsLZ3X4c?autoplay=0",
   },
   {
     id: "stream5",
-    title: "Gameplay de CS2 no PREMIER // LIVE de CS2",
-    game: "Call of Duty Warzone",
+    title: "LIVE GIVING ROCKET LEAGUE CREDITS OR FENNECS",
+    game: "Rocket League",
     viewers: 67,
-    streamer: "CallOfDutyLeague",
+    streamer: "RocketLeagueOfficial",
     thumbnailUrl: "/images/esports/game5.jpg",
     videoUrl: "https://www.youtube.com/embed/YNGp_FEZ8yU?autoplay=0",
   },
@@ -109,9 +109,9 @@ const defaultStreams: Stream[] = [
 const gamesToFetch = [
   { name: "Valorant", default: defaultStreams[0] },
   { name: "Fortnite", default: defaultStreams[1] },
-  { name: "Rocket League", default: defaultStreams[2] },
-  { name: "League of Legends", default: defaultStreams[3] },
-  { name: "Call of Duty Warzone", default: defaultStreams[4] },
+  { name: "League of Legends", default: defaultStreams[2] },
+  { name: "Call of Duty Warzone", default: defaultStreams[3] },
+  { name: "Rocket League", default: defaultStreams[4] },
   { name: "Overwatch", default: defaultStreams[5] }
 ];
 
@@ -161,6 +161,7 @@ export default function VideoStream() {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [apiLimitReached, setApiLimitReached] = useState(false);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     { 
       id: generateId(),
@@ -222,25 +223,31 @@ export default function VideoStream() {
   const messageInputRef = useRef<HTMLInputElement>(null);
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
-  useEffect(() => {
-    fetchLiveStreams();
-  }, []);
-  
   const fetchLiveStreams = async () => {
+    if (apiLimitReached) {
+      setError("YouTube API quota limit has been reached. Using default content instead.");
+      return;
+    }
+    
     setIsLoading(true);
     setError(null);
     
     try {
       const streamPromises = gamesToFetch.map(async (game) => {
-        const response = await fetchLiveStreamsByGame(game.name);
-        
-        if (response.streams.length > 0) {
-          return convertYouTubeStreamToComponentStream(
-            response.streams[0], 
-            game.name, 
-            game.default.thumbnailUrl
-          );
-        } else {
+        try {
+          const response = await fetchLiveStreamsByGame(game.name);
+          
+          if (response.streams.length > 0) {
+            return convertYouTubeStreamToComponentStream(
+              response.streams[0], 
+              game.name, 
+              game.default.thumbnailUrl
+            );
+          } else {
+            return game.default;
+          }
+        } catch (err) {
+          console.error(`Error fetching streams for ${game.name}:`, err);
           return game.default;
         }
       });
@@ -253,7 +260,6 @@ export default function VideoStream() {
       
       if (hasNewStreams) {
         setFeaturedStreams(fetchedStreams);
-        setActiveStream(fetchedStreams[0]);
         
         const newMessage: ChatMessage = {
           id: generateId(),
@@ -265,10 +271,14 @@ export default function VideoStream() {
         };
         
         setChatMessages(prev => [...prev, newMessage]);
+      } else {
+        setApiLimitReached(true);
+        setError("No new live streams found. Using default content instead.");
       }
     } catch (err) {
       console.error('Error fetching live streams:', err);
-      setError('Failed to load live streams. Using default content instead.');
+      setApiLimitReached(true);
+      setError('YouTube API quota limit reached. Using default content instead.');
       
       const errorMessage: ChatMessage = {
         id: generateId(),
@@ -500,7 +510,7 @@ export default function VideoStream() {
             className="mt-4 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800/50 px-4 py-2 rounded-lg text-white transition-colors"
           >
             <RefreshCw size={16} className={`${isLoading ? 'animate-spin' : ''}`} />
-            {isLoading ? 'Refreshing...' : 'Refresh Live Streams'}
+            {isLoading ? 'Refreshing...' : apiLimitReached ? 'API Limit Reached' : 'Load Live Streams'}
           </button>
           {error && <p className="mt-2 text-red-400 text-sm">{error}</p>}
         </motion.div>
