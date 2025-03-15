@@ -61,10 +61,14 @@ LinkedIn) with appropriate icons.
  - SEO Optimized: Include basic SEO practices, such as meta titles and descriptions for all pages.
  - User-Friendly: The navigation menu should be intuitive and easy to use.
 - Add placeholder animations or transitions to improve interactivity
-Technologies to Use
+
+## Technologies to Use
+
 Participants can use any frontend and backend technologies of their choice to build the website (e.g.,
 HTML, CSS, JavaScript, React, Angular, Python Flask/Django, PHP, etc.).
-Evaluation Criteria
+
+## Evaluation Criteria
+
 The submissions will be evaluated based on the following parameters:
 1. Design and Aesthetics
 2. Functionality and Responsiveness
@@ -79,7 +83,9 @@ Additional points for following features:
 4. Esports Live Leaderboard & Player Profiles
 5. Social Media Auto-Posting (For new blogs or esport events)
 6. Video streaming integration
-Submission Guidelines
+
+## Submission Guidelines
+
 1. Teams must submit:
  - A live link to the hosted website (using platforms like GitHub Pages, Netlify, or similar).
  - A document outlining:
