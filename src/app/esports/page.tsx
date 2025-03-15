@@ -257,17 +257,17 @@ export default function EsportsPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+      <section className="relative pt-24 md:pt-32 pb-16 md:pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero/esports-hero.jpg"
             alt="ABC Esports"
             fill
             priority
-            sizes="100vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -276,20 +276,20 @@ export default function EsportsPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">ABC Esports</h1>
-            <p className="text-xl text-blue-100 mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">ABC Esports</h1>
+            <p className="text-lg sm:text-xl text-blue-100 mb-6 md:mb-8 px-2">
               Compete in our premier gaming tournaments and showcase your skills
             </p>
-            <div className="flex justify-center gap-4 flex-wrap">
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 flex-wrap">
               <a 
                 href="#upcoming-events" 
-                className="bg-white text-blue-900 hover:bg-blue-100 px-6 py-3 rounded-full inline-flex items-center font-medium transition-colors"
+                className="bg-white text-blue-900 hover:bg-blue-100 px-6 py-3 rounded-full inline-flex items-center justify-center font-medium transition-colors w-full sm:w-auto"
               >
                 View Tournaments
               </a>
               <a 
                 href="#matchmaking" 
-                className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-6 py-3 rounded-full inline-flex items-center font-medium transition-colors"
+                className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-6 py-3 rounded-full inline-flex items-center justify-center font-medium transition-colors w-full sm:w-auto"
               >
                 Match Schedules
               </a>
@@ -331,7 +331,7 @@ export default function EsportsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg flex flex-col h-full border border-transparent hover:border-blue-500 transition-colors"
+                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg flex flex-col h-full border border-transparent hover:border-blue-500 transition-all hover:shadow-xl hover:-translate-y-1 duration-300"
                 >
                   <div className="relative h-48">
                     <Image
@@ -386,7 +386,7 @@ export default function EsportsPage() {
                     <div className="mt-auto flex items-center justify-between">
                       {event.registrationOpen ? (
                         <button
-                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex-1 mr-2"
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all flex-1 mr-2 hover:shadow-lg hover:scale-105 active:scale-95 duration-300"
                           onClick={() => openRegistrationForm(event)}
                         >
                           Register Now
@@ -451,7 +451,7 @@ export default function EsportsPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg flex flex-col h-full border border-transparent hover:border-blue-500 transition-colors"
+                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg flex flex-col h-full border border-transparent hover:border-blue-500 transition-all hover:shadow-xl hover:-translate-y-1 duration-300"
                 >
                   <div className="relative h-48">
                     <Image
@@ -506,7 +506,7 @@ export default function EsportsPage() {
                     <div className="mt-auto flex items-center justify-between">
                       {event.registrationOpen ? (
                         <button
-                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex-1 mr-2"
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all flex-1 mr-2 hover:shadow-lg hover:scale-105 active:scale-95 duration-300"
                           onClick={() => openRegistrationForm(event)}
                         >
                           Register Now
@@ -568,16 +568,16 @@ export default function EsportsPage() {
 
       {/* Registration Form */}
       {registrationEvent && (
-        <section id="registration-form" className="py-16 bg-gray-50 dark:bg-gray-900">
+        <section id="registration-form" className="py-12 md:py-16 bg-gray-50 dark:bg-gray-900">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md"
+                className="bg-white dark:bg-gray-800 p-4 sm:p-6 md:p-8 rounded-lg shadow-md"
               >
-                <h2 className="text-2xl font-bold mb-6">
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 md:mb-6">
                   Register for: {registrationEvent.title}
                 </h2>
 
@@ -585,12 +585,12 @@ export default function EsportsPage() {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="bg-green-100 dark:bg-green-900/30 p-6 rounded-lg text-center"
+                    className="bg-green-100 dark:bg-green-900/30 p-4 sm:p-6 rounded-lg text-center"
                   >
                     <div className="flex justify-center mb-4">
                       <CheckCircle className="text-green-600 dark:text-green-400" size={48} />
                     </div>
-                    <h3 className="text-xl font-semibold text-green-700 dark:text-green-400 mb-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-green-700 dark:text-green-400 mb-2">
                       Registration Successful!
                     </h3>
                     <p className="text-green-600 dark:text-green-300 mb-4">
@@ -601,7 +601,7 @@ export default function EsportsPage() {
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                     <div>
                       <label htmlFor="teamName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Team Name*
@@ -686,7 +686,7 @@ export default function EsportsPage() {
                       </p>
                     </div>
 
-                    <div className="border-t border-gray-200 dark:border-gray-700 pt-6">
+                    <div className="border-t border-gray-200 dark:border-gray-700 pt-5">
                       <div className="flex items-start">
                         <input
                           type="checkbox"
@@ -703,18 +703,18 @@ export default function EsportsPage() {
                       </div>
                     </div>
 
-                    <div className="border-t border-gray-200 dark:border-gray-700 pt-6 flex justify-end gap-4">
+                    <div className="border-t border-gray-200 dark:border-gray-700 pt-4 sm:pt-6 flex flex-col sm:flex-row justify-end gap-3 sm:gap-4">
                       <button
                         type="button"
                         onClick={() => setRegistrationEvent(null)}
-                        className="px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        className="px-4 sm:px-6 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors w-full sm:w-auto"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className={`bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors ${
+                        className={`bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-6 py-2 rounded-lg transition-colors w-full sm:w-auto ${
                           isSubmitting ? "opacity-70 cursor-not-allowed" : ""
                         }`}
                       >
@@ -758,8 +758,20 @@ export default function EsportsPage() {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                        {matches.map((match) => (
-                          <tr key={match.id} className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                        {matches.map((match, index) => (
+                          <motion.tr 
+                            key={match.id} 
+                            className="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ 
+                              duration: 0.3, 
+                              delay: 0.1 * index,
+                              type: "spring",
+                              stiffness: 100
+                            }}
+                          >
                             <td className="py-4 px-4">#{match.id}</td>
                             <td className="py-4 px-4">
                               <div className="flex items-center mb-2">
@@ -801,7 +813,7 @@ export default function EsportsPage() {
                                 Contact
                               </button>
                             </td>
-                          </tr>
+                          </motion.tr>
                         ))}
                       </tbody>
                     </table>
@@ -838,8 +850,20 @@ export default function EsportsPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                      {leaderboard.map((team) => (
-                        <tr key={team.rank} className="hover:bg-gray-100 dark:hover:bg-gray-700">
+                      {leaderboard.map((team, index) => (
+                        <motion.tr 
+                          key={team.rank} 
+                          className="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ 
+                            duration: 0.3, 
+                            delay: 0.05 * index,
+                            type: "spring",
+                            stiffness: 100
+                          }}
+                        >
                           <td className="py-4 px-4 font-medium">{team.rank}</td>
                           <td className="py-4 px-4">
                             <div className="flex items-center">
@@ -857,7 +881,7 @@ export default function EsportsPage() {
                           <td className="py-4 px-4 text-center">{team.wins}</td>
                           <td className="py-4 px-4 text-center">{team.losses}</td>
                           <td className="py-4 px-4 text-center font-semibold">{team.points}</td>
-                        </tr>
+                        </motion.tr>
                       ))}
                     </tbody>
                   </table>
