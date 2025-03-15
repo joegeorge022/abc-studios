@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import Link from "next/link";
 import { 
   Trophy, 
   Calendar, 
@@ -15,6 +14,7 @@ import {
   ChevronUp,
   CheckCircle
 } from "lucide-react";
+import Image from "next/image";
 
 type EsportsEvent = {
   id: string;
@@ -29,6 +29,7 @@ type EsportsEvent = {
   description: string;
   rules: string[];
   registrationOpen: boolean;
+  image: string;
 };
 
 const esportsEvents: EsportsEvent[] = [
@@ -41,17 +42,17 @@ const esportsEvents: EsportsEvent[] = [
     registrationFee: 25,
     prizePool: "$5,000",
     maxParticipants: 32,
-    currentParticipants: 28,
-    description: "Join our premier Valorant tournament featuring the best teams competing for glory and prizes. This 2-day event will showcase top-tier gameplay with professional casting and production.",
+    currentParticipants: 18,
+    description: "Join our flagship summer tournament for intense competition and great prizes. This 5v5 team-based tournament features a double-elimination format.",
     rules: [
-      "5v5 team competition",
-      "Double elimination bracket",
-      "Map selection follows standard tournament protocol",
-      "All participants must be 16+ years old",
-      "Teams must check in 30 minutes before their scheduled match",
-      "Standard competitive settings will be used"
+      "Teams must have 5 players and up to 2 substitutes",
+      "Players must be at least 16 years old",
+      "All matches will be best-of-three",
+      "Finals will be best-of-five",
+      "Standard competitive maps and settings"
     ],
-    registrationOpen: true
+    registrationOpen: true,
+    image: "/images/esports/game1.jpg"
   },
   {
     id: "event2",
@@ -72,7 +73,8 @@ const esportsEvents: EsportsEvent[] = [
       "Standard competitive settings will be used",
       "Players must be in the designated Discord server during the event"
     ],
-    registrationOpen: true
+    registrationOpen: true,
+    image: "/images/esports/game2.jpg"
   },
   {
     id: "event3",
@@ -93,35 +95,35 @@ const esportsEvents: EsportsEvent[] = [
       "Standard tournament draft mode",
       "Teams must check in 45 minutes before their scheduled match"
     ],
-    registrationOpen: true
+    registrationOpen: true,
+    image: "/images/esports/game3.jpg"
   },
   {
     id: "event4",
-    title: "Rocket League Rumble",
-    game: "Rocket League",
-    date: "August 20, 2024",
-    time: "5:00 PM - 9:00 PM EDT",
-    registrationFee: 20,
-    prizePool: "$2,500",
-    maxParticipants: 32,
-    currentParticipants: 15,
-    description: "Show off your car control and teamwork in our Rocket League tournament. Fast-paced matches and exciting plays guaranteed in this one-day event.",
+    title: "Call of Duty: Warzone Battle Royale",
+    game: "Call of Duty: Warzone",
+    date: "October 8, 2024",
+    time: "6:00 PM - 11:00 PM EDT",
+    registrationFee: 10,
+    prizePool: "$1,500",
+    maxParticipants: 40,
+    currentParticipants: 22,
+    description: "Drop in and prove you're the last squad standing in our Warzone tournament. Teams of three will compete across multiple rounds for points and prizes.",
     rules: [
-      "3v3 team competition",
-      "Double elimination bracket",
-      "Standard competitive settings",
-      "All matches best-of-3 until finals (best-of-5)",
-      "Teams must check in 20 minutes before their match",
-      "Participants must be in the designated Discord server"
+      "Trios format (3-player teams)",
+      "Point-based scoring system",
+      "Custom lobby matches",
+      "Multiple rounds with cumulative scoring",
+      "Finals feature the top 10 teams"
     ],
-    registrationOpen: true
+    registrationOpen: true,
+    image: "/images/esports/game4.jpg"
   }
 ];
 
 export default function EsportsPage() {
   const [expandedEvent, setExpandedEvent] = useState<string | null>(null);
   const [registrationEvent, setRegistrationEvent] = useState<EsportsEvent | null>(null);
-  const [showMatchmaking, setShowMatchmaking] = useState(false);
   
   const [formData, setFormData] = useState({
     teamName: "",
@@ -145,7 +147,6 @@ export default function EsportsPage() {
 
   const openRegistrationForm = (event: EsportsEvent) => {
     setRegistrationEvent(event);
-    // Scroll to registration form
     setTimeout(() => {
       document.getElementById("registration-form")?.scrollIntoView({ behavior: "smooth" });
     }, 100);
@@ -171,7 +172,6 @@ export default function EsportsPage() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -184,18 +184,14 @@ export default function EsportsPage() {
         agreeToRules: false
       });
       
-      // Reset after 5 seconds and show matchmaking
       setTimeout(() => {
         setIsSubmitted(false);
         setRegistrationEvent(null);
-        setShowMatchmaking(true);
-        // Scroll to matchmaking
         document.getElementById("matchmaking")?.scrollIntoView({ behavior: "smooth" });
       }, 5000);
     }, 1500);
   };
 
-  // Mock data for matchmaking example
   const matches = [
     { id: 1, team1: "Phoenix Gaming", team2: "Dragon Esports", date: "July 15, 2024", time: "12:30 PM EDT", status: "Scheduled" },
     { id: 2, team1: "Nebula Squad", team2: "Titan Force", date: "July 15, 2024", time: "2:00 PM EDT", status: "Scheduled" },
@@ -203,7 +199,6 @@ export default function EsportsPage() {
     { id: 4, team1: "Spectral Gaming", team2: "Luminary Legends", date: "July 15, 2024", time: "5:00 PM EDT", status: "Scheduled" }
   ];
   
-  // Mock data for leaderboard
   const leaderboard = [
     { rank: 1, team: "Phoenix Gaming", wins: 3, losses: 0, points: 9 },
     { rank: 2, team: "Nebula Squad", wins: 2, losses: 1, points: 6 },
@@ -218,8 +213,19 @@ export default function EsportsPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero/esports-hero.jpg"
+            alt="ABC Esports"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -273,115 +279,129 @@ export default function EsportsPage() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            {esportsEvents.map((event) => (
-              <motion.div
-                key={event.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="mb-6 bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-md"
-              >
-                <div 
-                  className="p-6 cursor-pointer"
-                  onClick={() => toggleEventDetails(event.id)}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {esportsEvents.map((event, index) => (
+                <motion.div
+                  key={event.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 * (index % 3) }}
+                  className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg flex flex-col h-full border border-transparent hover:border-blue-500 transition-colors"
                 >
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-                    <div>
-                      <div className="flex items-center mb-2">
-                        <Trophy className="text-yellow-500 mr-2" size={20} />
-                        <h3 className="text-xl font-bold">{event.title}</h3>
+                  <div className="relative h-48">
+                    <Image
+                      src={event.image}
+                      alt={`${event.game} tournament - ${event.title}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end p-4">
+                      <div>
+                        <span className="bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded">{event.game}</span>
+                        <h3 className="text-xl font-bold text-white mt-2">{event.title}</h3>
                       </div>
-                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm text-gray-600 dark:text-gray-400 mb-4">
-                        <div className="flex items-center">
-                          <span className="font-medium">{event.game}</span>
+                    </div>
+                  </div>
+                  <div className="p-6 cursor-pointer" onClick={() => toggleEventDetails(event.id)}>
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+                      <div>
+                        <div className="flex items-center mb-2">
+                          <Trophy className="text-yellow-500 mr-2" size={20} />
+                          <h3 className="text-xl font-bold">{event.title}</h3>
                         </div>
-                        <div className="flex items-center">
-                          <Calendar size={16} className="mr-1" />
-                          <span>{event.date}</span>
+                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-sm text-gray-600 dark:text-gray-400 mb-4">
+                          <div className="flex items-center">
+                            <span className="font-medium">{event.game}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Calendar size={16} className="mr-1" />
+                            <span>{event.date}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Clock size={16} className="mr-1" />
+                            <span>{event.time}</span>
+                          </div>
                         </div>
-                        <div className="flex items-center">
-                          <Clock size={16} className="mr-1" />
-                          <span>{event.time}</span>
+                        <div className="flex flex-wrap gap-4 text-sm">
+                          <div className="flex items-center">
+                            <DollarSign size={16} className="mr-1 text-green-500" />
+                            <span>Registration: ${event.registrationFee}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Award size={16} className="mr-1 text-yellow-500" />
+                            <span>Prize Pool: {event.prizePool}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Users size={16} className="mr-1 text-blue-500" />
+                            <span>
+                              Participants: {event.currentParticipants}/{event.maxParticipants}
+                            </span>
+                          </div>
                         </div>
                       </div>
-                      <div className="flex flex-wrap gap-4 text-sm">
-                        <div className="flex items-center">
-                          <DollarSign size={16} className="mr-1 text-green-500" />
-                          <span>Registration: ${event.registrationFee}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Award size={16} className="mr-1 text-yellow-500" />
-                          <span>Prize Pool: {event.prizePool}</span>
-                        </div>
-                        <div className="flex items-center">
-                          <Users size={16} className="mr-1 text-blue-500" />
-                          <span>
-                            Participants: {event.currentParticipants}/{event.maxParticipants}
+                      <div className="mt-4 md:mt-0 flex items-center gap-2">
+                        {event.registrationOpen ? (
+                          <button
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openRegistrationForm(event);
+                            }}
+                          >
+                            Register Now
+                          </button>
+                        ) : (
+                          <span className="bg-gray-400 text-white px-4 py-2 rounded-lg">
+                            Registration Closed
                           </span>
+                        )}
+                        {expandedEvent === event.id ? (
+                          <ChevronUp size={20} className="text-gray-500" />
+                        ) : (
+                          <ChevronDown size={20} className="text-gray-500" />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {expandedEvent === event.id && (
+                    <div className="px-6 pb-6 pt-2 border-t border-gray-200 dark:border-gray-700">
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold mb-2">Event Description</h4>
+                        <p className="text-gray-700 dark:text-gray-300">
+                          {event.description}
+                        </p>
+                      </div>
+
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold mb-2">Tournament Rules</h4>
+                        <ul className="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-300">
+                          {event.rules.map((rule, index) => (
+                            <li key={index}>{rule}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {event.registrationOpen && (
+                        <div className="mt-6 text-center">
+                          <button
+                            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openRegistrationForm(event);
+                            }}
+                          >
+                            Register for This Tournament
+                          </button>
                         </div>
-                      </div>
-                    </div>
-                    <div className="mt-4 md:mt-0 flex items-center gap-2">
-                      {event.registrationOpen ? (
-                        <button
-                          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            openRegistrationForm(event);
-                          }}
-                        >
-                          Register Now
-                        </button>
-                      ) : (
-                        <span className="bg-gray-400 text-white px-4 py-2 rounded-lg">
-                          Registration Closed
-                        </span>
-                      )}
-                      {expandedEvent === event.id ? (
-                        <ChevronUp size={20} className="text-gray-500" />
-                      ) : (
-                        <ChevronDown size={20} className="text-gray-500" />
                       )}
                     </div>
-                  </div>
-                </div>
-
-                {expandedEvent === event.id && (
-                  <div className="px-6 pb-6 pt-2 border-t border-gray-200 dark:border-gray-700">
-                    <div className="mb-6">
-                      <h4 className="text-lg font-semibold mb-2">Event Description</h4>
-                      <p className="text-gray-700 dark:text-gray-300">
-                        {event.description}
-                      </p>
-                    </div>
-
-                    <div className="mb-6">
-                      <h4 className="text-lg font-semibold mb-2">Tournament Rules</h4>
-                      <ul className="list-disc pl-6 space-y-1 text-gray-700 dark:text-gray-300">
-                        {event.rules.map((rule, index) => (
-                          <li key={index}>{rule}</li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {event.registrationOpen && (
-                      <div className="mt-6 text-center">
-                        <button
-                          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            openRegistrationForm(event);
-                          }}
-                        >
-                          Register for This Tournament
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </motion.div>
-            ))}
+                  )}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -496,7 +516,7 @@ export default function EsportsPage() {
                             value={participant}
                             onChange={(e) => handleParticipantChange(index, e.target.value)}
                             placeholder={`Team Member ${index + 1}${index === 0 ? ' (Captain)' : ''}`}
-                            required={index < 3} // Require at least 3 team members
+                            required={index < 3}
                             className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
                           />
                         ))}

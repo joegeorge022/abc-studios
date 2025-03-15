@@ -10,17 +10,19 @@ import {
   CheckCircle, 
   ChevronRight 
 } from "lucide-react";
+import Image from "next/image";
 
 type ColorType = "blue" | "purple" | "indigo" | "teal";
 
 type Service = {
   id: string;
-  icon: any;
+  icon: React.ElementType;
   title: string;
   shortDesc: string;
   longDesc: string;
   features: string[];
   color: ColorType;
+  image: string;
 }
 
 const services: Service[] = [
@@ -38,7 +40,8 @@ const services: Service[] = [
       "Technical support throughout your event",
       "Streaming to multiple platforms simultaneously"
     ],
-    color: "blue"
+    color: "blue",
+    image: "/images/services/livestreaming.jpg"
   },
   {
     id: "mediaproduction",
@@ -54,7 +57,8 @@ const services: Service[] = [
       "Sound design and audio production",
       "Post-production editing and color grading"
     ],
-    color: "purple"
+    color: "purple",
+    image: "/images/services/mediaproduction.jpg"
   },
   {
     id: "digitalmarketing",
@@ -70,7 +74,8 @@ const services: Service[] = [
       "Email marketing campaigns",
       "Analytics and performance reporting"
     ],
-    color: "indigo"
+    color: "indigo",
+    image: "/images/services/digitalmarketing.jpg"
   },
   {
     id: "eventmanagement",
@@ -86,7 +91,8 @@ const services: Service[] = [
       "On-site event production and management",
       "Post-event evaluation and analytics"
     ],
-    color: "teal"
+    color: "teal",
+    image: "/images/services/eventmanagement.jpg"
   }
 ];
 
@@ -126,8 +132,19 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero/services-hero.jpg"
+            alt="Our Services"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -182,6 +199,15 @@ export default function ServicesPage() {
                     <service.icon size={28} />
                   </div>
                   <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
+                  <div className="relative h-80 mb-6 rounded-lg overflow-hidden">
+                    <Image 
+                      src={service.image} 
+                      alt={service.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  </div>
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     {service.longDesc}
                   </p>

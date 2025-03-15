@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
 import { Search, Calendar, User, Tag, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 type BlogPost = {
   id: string;
@@ -14,6 +15,7 @@ type BlogPost = {
   category: string;
   readTime: string;
   slug: string;
+  image: string;
 };
 
 const blogPosts: BlogPost[] = [
@@ -26,6 +28,7 @@ const blogPosts: BlogPost[] = [
     category: "Live Streaming",
     readTime: "5 min read",
     slug: "10-tips-successful-live-streaming-events",
+    image: "/images/blog/post1.jpg",
   },
   {
     id: "2",
@@ -36,6 +39,7 @@ const blogPosts: BlogPost[] = [
     category: "Event Management",
     readTime: "8 min read",
     slug: "future-virtual-events-trends",
+    image: "/images/blog/post2.jpg",
   },
   {
     id: "3",
@@ -46,6 +50,7 @@ const blogPosts: BlogPost[] = [
     category: "Media Production",
     readTime: "6 min read",
     slug: "creating-compelling-video-content-social-media",
+    image: "/images/blog/post3.jpg",
   },
   {
     id: "4",
@@ -56,6 +61,7 @@ const blogPosts: BlogPost[] = [
     category: "Digital Marketing",
     readTime: "10 min read",
     slug: "build-effective-digital-marketing-strategy",
+    image: "/images/blog/post4.jpg",
   },
   {
     id: "5",
@@ -66,6 +72,7 @@ const blogPosts: BlogPost[] = [
     category: "Media Production",
     readTime: "7 min read",
     slug: "behind-scenes-corporate-video-production",
+    image: "/images/blog/post5.jpg",
   },
   {
     id: "6",
@@ -76,6 +83,7 @@ const blogPosts: BlogPost[] = [
     category: "Esports",
     readTime: "9 min read",
     slug: "rise-esports-opportunities-brands",
+    image: "/images/blog/post6.jpg",
   },
   {
     id: "7",
@@ -86,6 +94,7 @@ const blogPosts: BlogPost[] = [
     category: "Event Management",
     readTime: "6 min read",
     slug: "maximizing-roi-event-marketing-budget",
+    image: "/images/blog/post7.jpg",
   },
   {
     id: "8",
@@ -96,6 +105,7 @@ const blogPosts: BlogPost[] = [
     category: "Media Production",
     readTime: "5 min read",
     slug: "audio-production-tips-professional-sound",
+    image: "/images/blog/post8.jpg",
   },
 ];
 
@@ -124,8 +134,19 @@ export default function BlogPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero/blog-hero.jpg"
+            alt="Blog & Insights"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -199,7 +220,15 @@ export default function BlogPage() {
                   transition={{ duration: 0.5, delay: 0.1 * (index % 3) }}
                   className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md flex flex-col h-full"
                 >
-                  <div className="h-48 bg-gradient-to-br from-blue-500 to-indigo-600"></div>
+                  <div className="h-48 relative">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover"
+                    />
+                  </div>
                   <div className="p-6 flex-grow">
                     <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
                       <div className="flex items-center mr-4">

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Mail, Phone, MapPin, Send, Check } from "lucide-react";
+import Image from "next/image";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -24,7 +25,6 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -35,7 +35,6 @@ export default function ContactPage() {
         message: "",
       });
       
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
@@ -45,8 +44,19 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero/contact-hero.jpg"
+            alt="Contact Us"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -255,13 +265,21 @@ export default function ContactPage() {
             transition={{ duration: 0.5 }}
             className="bg-gray-50 dark:bg-gray-900 overflow-hidden rounded-xl"
           >
-            <div className="h-96 bg-gradient-to-r from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="mx-auto mb-4 text-gray-500 dark:text-gray-400" size={48} />
-                <p className="text-gray-600 dark:text-gray-300 text-lg font-medium">
-                  Map view will be displayed here
-                </p>
-              </div>
+            <div className="h-96 relative">
+              <a href="https://maps.app.goo.gl/PbRHZ4CXiLZnRZRe6" target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10">
+                <span className="sr-only">Open in Google Maps</span>
+              </a>
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835253202476!2d144.95372225!3d-37.8172402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sMove%20Studios!5e0!3m2!1sen!2sus!4v1623913561880!5m2!1sen!2sus" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="ABC Studios Location"
+                className="absolute inset-0"
+              />
             </div>
           </motion.div>
         </div>

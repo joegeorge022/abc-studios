@@ -15,8 +15,9 @@ export default function Home() {
             src="/hero-bg.jpg"
             alt="Media Production Background"
             fill
+            priority
+            sizes="100vw"
             className="object-cover"
-          priority
         />
           <div className="absolute inset-0 bg-black/50" />
         </div>

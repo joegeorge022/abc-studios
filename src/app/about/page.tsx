@@ -47,8 +47,19 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-28 md:pt-32 pb-16 md:pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-28 md:pt-32 pb-16 md:pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero/about-hero.jpg"
+            alt="About ABC Studios"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

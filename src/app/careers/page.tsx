@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Briefcase, MapPin, Clock, ChevronDown, ChevronUp, Send, Check, File } from "lucide-react";
+import Image from "next/image";
 
 type JobPosting = {
   id: string;
@@ -160,7 +161,6 @@ export default function CareersPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -172,7 +172,6 @@ export default function CareersPage() {
         coverLetter: "",
       });
 
-      // Reset after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
         setApplicationFormVisible(false);
@@ -186,8 +185,19 @@ export default function CareersPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero/careers-hero.jpg"
+            alt="Join Our Team"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

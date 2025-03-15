@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Eye, Link as LinkIcon } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const categories = ["All", "Live Streaming", "Media Production"];
 
@@ -14,6 +15,7 @@ type Project = {
   description: string;
   date: string;
   client: string;
+  image: string;
 };
 
 const projects: Project[] = [
@@ -24,6 +26,7 @@ const projects: Project[] = [
     description: "A three-day virtual tech conference with multiple tracks, interactive sessions, and real-time audience engagement. We provided end-to-end streaming solutions, including setup, production, and technical support.",
     date: "June 2023",
     client: "TechCon Inc.",
+    image: "/images/portfolio/project1.jpg",
   },
   {
     id: "project2",
@@ -32,14 +35,16 @@ const projects: Project[] = [
     description: "Live streaming of an international music awards ceremony to multiple platforms simultaneously. Our team managed multi-camera setups, audio mixing, and real-time graphics integration.",
     date: "September 2023",
     client: "Universal Music Group",
+    image: "/images/portfolio/project2.jpg",
   },
   {
     id: "project3",
     title: "Corporate Brand Identity Film",
     category: "Media Production",
     description: "A cinematic brand film showcasing a corporate client's values, mission, and impact. We handled everything from concept development to final delivery, including scriptwriting, filming, and post-production.",
-    date: "March 2023",
-    client: "Horizon Enterprises",
+    date: "November 2023",
+    client: "Apex Innovations",
+    image: "/images/portfolio/project3.jpeg",
   },
   {
     id: "project4",
@@ -48,6 +53,7 @@ const projects: Project[] = [
     description: "A series of promotional videos and photography for a new product launch. Our team created high-quality visual content for use across digital platforms, advertising, and in-store displays.",
     date: "November 2023",
     client: "Lumina Tech",
+    image: "/images/portfolio/project4.jpg",
   },
   {
     id: "project5",
@@ -56,6 +62,7 @@ const projects: Project[] = [
     description: "Live streaming of a charity fundraising event with real-time donation tracking, multiple camera angles, and integration with social media platforms for wider reach and engagement.",
     date: "December 2023",
     client: "Hope Foundation",
+    image: "/images/portfolio/project5.jpg",
   },
   {
     id: "project6",
@@ -64,6 +71,7 @@ const projects: Project[] = [
     description: "A five-part documentary series exploring urban renewal projects in major cities. We provided full production services, including location scouting, interviews, drone footage, and post-production.",
     date: "February 2024",
     client: "City Development Coalition",
+    image: "/images/portfolio/project6.jpg",
   },
 ];
 
@@ -78,8 +86,19 @@ export default function PortfolioPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero/portfolio-hero.jpg"
+            alt="Our Portfolio"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,7 +143,14 @@ export default function PortfolioPage() {
                 transition={{ duration: 0.5, delay: 0.1 * index }}
                 className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden shadow-md flex flex-col h-full"
               >
-                <div className="h-56 bg-gradient-to-br from-blue-600 to-indigo-600 relative">
+                <div className="h-56 relative">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover"
+                  />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 bg-black/60 transition-opacity">
                     <button 
                       onClick={() => setSelectedProject(project)}
@@ -171,7 +197,16 @@ export default function PortfolioPage() {
             animate={{ opacity: 1, scale: 1 }}
             className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
           >
-            <div className="h-72 bg-gradient-to-br from-blue-600 to-indigo-600 relative"></div>
+            <div className="h-72 relative">
+              <Image
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+            </div>
             <div className="p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
