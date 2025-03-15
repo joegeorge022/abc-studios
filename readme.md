@@ -34,6 +34,7 @@
    - Reduced API calls for YouTube data to avoid quota limitations
 
 4. **Accessibility Features**:
+   - Text size adjustment controls via accessibility button
    - High contrast color schemes
    - Semantic HTML structure
    - Keyboard navigation support

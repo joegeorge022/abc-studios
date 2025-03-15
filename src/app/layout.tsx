@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Inter } from 'next/font/google';
 import AIChatWrapper from '@/components/AIChatWrapper';
+import AccessibilityControls from '@/components/layout/AccessibilityControls';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,6 +71,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <AIChatWrapper />
+        <AccessibilityControls />
       </body>
     </html>
   );
