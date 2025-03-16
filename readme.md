@@ -225,3 +225,15 @@ ABC Studios is a comprehensive digital production platform that combines modern 
 - Enhanced animations using Framer Motion
 - Social media auto-posting for new blog posts or esports events
 
+### Lighthouse Performance
+<details>
+<summary> Desktop </summary>
+<br>
+  <img width="734" alt="Screenshot 2025-03-16 at 10 24 52 AM" src="https://github.com/user-attachments/assets/ef563238-470f-4d01-85ed-416d134b70e7" />
+</details>
+
+<details>
+<summary> Mobile </summary>
+<br>
+    <img width="734" alt="Screenshot 2025-03-16 at 10 24 12 AM" src="https://github.com/user-attachments/assets/015327cd-238b-45a4-b08b-3ee0fbe4956c" />
+</details>
