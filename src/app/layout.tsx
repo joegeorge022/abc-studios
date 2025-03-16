@@ -20,40 +20,30 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     template: '%s | ABC Studios',
-    default: 'ABC Studios - Live Streaming, Media Production & Digital Marketing',
+    default: 'ABC Studios - Media Production, Live Streaming, and Esports Services',
   },
-  description: 'ABC Studios specializes in professional live streaming, media production, digital marketing, and event management services. Discover how we can elevate your brand with our creative solutions.',
+  description: 'ABC Studios specializes in live streaming, media production, digital marketing, event management and Esports services. Bringing your vision to life.',
   keywords: ['live streaming', 'media production', 'digital marketing', 'event management', 'esports'],
   authors: [{ name: 'ABC Studios Team' }],
   generator: 'Next.js',
   applicationName: 'ABC Studios',
-  robots: 'index, follow',
+  robots: {
+    index: true,
+    follow: true,
+  },
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
   ],
-  viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0',
+  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
-    url: 'https://abc-studios.vercel.app/',
     siteName: 'ABC Studios',
-    title: 'ABC Studios - Live Streaming, Media Production & Digital Marketing',
-    description: 'Professional live streaming, media production, and digital marketing services for your business.',
-    images: [
-      {
-        url: '/hero-bg.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'ABC Studios',
-      },
-    ],
+    locale: 'en_US',
+    images: ['/hero-bg.jpg'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ABC Studios - Live Streaming, Media Production & Digital Marketing',
-    description: 'Professional live streaming, media production, and digital marketing services for your business.',
-    images: ['/hero-bg.jpg'],
   },
 };
 
