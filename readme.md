@@ -19,9 +19,9 @@
 
 - [Project Overview](#-project-overview)
 - [Technology Stack](#-technology-stack)
-- [Detailed Technologies](#-detailed-technologies)
-- [Design Decisions](#-design-decisions)
-- [Limitations & Roadmap](#-limitations--roadmap)
+- [Key Features](#-key-features)
+- [Design & Performance](#-design--performance)
+- [Roadmap](#-roadmap)
 
 ## 🚀 Project Overview
 
@@ -76,164 +76,84 @@ ABC Studios is a comprehensive digital production platform that combines modern 
 
 ---
 
-## 📚 Detailed Technologies
+## 🌟 Key Features
 
-### 🖥️ Frontend Framework
-
-- Next.js 14 with App Router
-- React 18 with TypeScript
+### 🖥️ Modern Frontend
+- Next.js 14 with App Router and React 18
+- TypeScript for type safety
 - Server and Client Components
 
-### 🎨 Styling
+### 🎨 Rich UI/UX
+- TailwindCSS with custom theming
+- GSAP animations and Framer Motion transitions
+- Responsive design across all devices
 
-- TailwindCSS with custom theme
-- CSS Modules
-- CSS Variables for theming
-- Responsive design principles
-
-### 📊 State Management
-
-- React Context API
-- React Hooks (useState, useEffect, useRef, useContext)
-- Custom hook patterns
-
-### ✨ Animations and UI Effects
-
-- GSAP (GreenSock Animation Platform) for advanced homepage animations
-- Framer Motion for page transitions and micro-interactions
-- CSS Transitions and keyframes
-- Intersection Observer API for scroll animations
-
-### 🎭 Icons and UI Elements
-
-- Lucide React for consistent iconography
-- Custom SVG assets
-- Responsive image handling
-
-### 🗄️ Backend & Data Management
-
-- Supabase (PostgreSQL) for database
-- REST API endpoints
-- Server actions for form submissions
-- Data fetching with SWR for optimized caching
-
-### 🔒 Authentication & Security
-
-- Basic authentication for admin section
-- Environment variables for API keys
-- Middleware for protected routes
-- Form validation and sanitization
-
-### 🔌 External APIs Integration
-
-- YouTube Data API v3 for live esports streaming with fallback mechanisms
-- Google Maps API for interactive location display
-- GROQ API for AI-powered features
-- Error handling and graceful degradation
-- Rate limiting management
+### 🗄️ Robust Backend
+- Supabase (PostgreSQL) database
+- Server actions for secure form submissions
+- Optimized data fetching with SWR
 
 ### 🤖 AI Integration
+- GROQ API for accessing Llama3 70B parameter model
+- Intelligent chatbot with context-aware responses
+- Advanced prompt engineering
 
-- GROQ API for accessing large language models
-- Llama3 70B parameter model for the intelligent chatbot assistant
-- Context-aware responses in the AI chat feature
-- Optimized prompt engineering for relevant results
+### 🔌 External APIs
+- YouTube Data API for esports streaming
+- Google Maps integration
+- Fallback mechanisms for API limitations
 
 ### ♿ Accessibility
+- ARIA attributes and keyboard navigation
+- Screen reader support and high contrast options
+- Text size adjustment controls
 
-- ARIA attributes
-- Keyboard navigation
-- Screen reader support
-- Color contrast compliance
-- Font size adjustments
-- Focus management
+---
+
+## 🎯 Design & Performance
 
 ### ⚡ Performance Optimization
 
-- Image optimization with Next.js Image component
-- Code splitting
-- Lazy loading components
-- Font optimization
-- Minimizing bundle size
-- Asset compression
+- Image optimization with Next.js Image
+- Code splitting and lazy loading
+- Font optimization and asset compression
+- Reduced API calls to avoid quota limitations
 
-### 🛠️ Development Tools
+<div align="center">
+  <div style="display: flex; justify-content: center; gap: 20px;">
+    <div>
+      <p><b>Desktop Performance</b></p>
+      <img width="360" alt="Desktop Lighthouse Score" src="https://github.com/user-attachments/assets/ef563238-470f-4d01-85ed-416d134b70e7" />
+    </div>
+    <div>
+      <p><b>Mobile Performance</b></p>
+      <img width="360" alt="Mobile Lighthouse Score" src="https://github.com/user-attachments/assets/015327cd-238b-45a4-b08b-3ee0fbe4956c" />
+    </div>
+  </div>
+</div>
 
-- ESLint for code quality
-- TypeScript for type safety
-- npm for package management
-- Git for version control
-- Prettier for consistent code formatting
-
-### 🚀 Deployment
-
-- Vercel for hosting and continuous deployment
-- Environment variable management
-- Preview deployments for pull requests
-
----
-
-## 🎯 Design Decisions
-
-### 🎭 Modern UI/UX Approach
+### 🎭 Design Philosophy
 
 > *"Design is not just what it looks like and feels like. Design is how it works."* – Steve Jobs
 
-- Dark-themed interface with vibrant accents for a premium, professional look
-- Responsive design that adapts to all device sizes
-- Strategic use of animations to enhance user engagement without affecting performance
-
-### 🧩 Component Architecture
-
-- Modular component structure for maintainability and reusability
+- Dark-themed interface with vibrant accents
+- Component-based architecture for maintainability
 - Consistent visual language across all pages
-- Custom avatar system using initials and color-coding for user identification
-
-### ⚡ Performance Optimizations
-
-- Image optimization using Next.js Image component
-- Lazy loading of off-screen content
-- Client-side API data caching
-- Reduced API calls for YouTube data to avoid quota limitations
-
-### ♿ Accessibility Features
-
-- Text size adjustment controls via accessibility button
-- High contrast color schemes
-- Semantic HTML structure
-- Keyboard navigation support
-- Screen reader compatible components
 
 ---
 
-## 🔍 Limitations & Roadmap
+## 🔍 Roadmap
 
 ### 🚧 Current Limitations
+- YouTube API quota restrictions
+- Pre-defined fallback content for API limits
 
-- **API Restrictions**: YouTube Data API has quota limitations that affect live stream fetching
-- **Fallback Content**: Using pre-defined content when API limits are reached
+### 🔮 In Progress
+- Payment processing for tournament registration
+- Enhanced authentication for esports events
+- Matchmaking system for participants
+- Multi-language support
 
-### 🔮 Features In Progress
-
-- **Payment Processing**: Integration for tournament registration
-- **User Authentication**: Enhanced system for esports event registration
-- **Matchmaking System**: For connecting registered participants
-- **Multi-language Support**: Internationalization functionality
-
-### 📈 Future Enhancements
-
+### 📈 Future Plans
 - Enhanced animations using Framer Motion
-- Social media auto-posting for new blog posts or esports events
-
-### Lighthouse Performance
-<details>
-<summary> Desktop </summary>
-<br>
-  <img width="734" alt="Screenshot 2025-03-16 at 10 24 52 AM" src="https://github.com/user-attachments/assets/ef563238-470f-4d01-85ed-416d134b70e7" />
-</details>
-
-<details>
-<summary> Mobile </summary>
-<br>
-    <img width="734" alt="Screenshot 2025-03-16 at 10 24 12 AM" src="https://github.com/user-attachments/assets/015327cd-238b-45a4-b08b-3ee0fbe4956c" />
-</details>
+- Social media integration for content sharing
