@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { 
   Facebook, 
@@ -8,9 +10,11 @@ import {
   Phone, 
   MapPin 
 } from "lucide-react";
+import { useLanguage } from "@/utils/languageContext";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { translations } = useLanguage();
   
   return (
     <footer className="bg-gray-900 text-white overflow-hidden w-full">
@@ -19,8 +23,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg md:text-xl font-bold mb-4">ABC Studios</h3>
             <p className="mb-4 text-sm md:text-base text-gray-300">
-              Specializing in live streaming, media production, digital marketing, 
-              event management services and Esports services.
+              {translations['about.description']}
             </p>
             <div className="flex space-x-4">
               <a 
@@ -63,29 +66,29 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="text-lg md:text-xl font-bold mb-4">Quick Links</h3>
+            <h3 className="text-lg md:text-xl font-bold mb-4">{translations['nav.about'] || 'Quick Links'}</h3>
             <ul className="space-y-2 text-sm md:text-base text-gray-300">
-              <li><Link href="/" className="hover:text-blue-400 transition-colors block py-1">Home</Link></li>
-              <li><Link href="/about" className="hover:text-blue-400 transition-colors block py-1">About Us</Link></li>
-              <li><Link href="/services" className="hover:text-blue-400 transition-colors block py-1">Services</Link></li>
-              <li><Link href="/portfolio" className="hover:text-blue-400 transition-colors block py-1">Portfolio</Link></li>
-              <li><Link href="/blog" className="hover:text-blue-400 transition-colors block py-1">Blog</Link></li>
+              <li><Link href="/" className="hover:text-blue-400 transition-colors block py-1">{translations['nav.home'] || 'Home'}</Link></li>
+              <li><Link href="/about" className="hover:text-blue-400 transition-colors block py-1">{translations['nav.about'] || 'About Us'}</Link></li>
+              <li><Link href="/services" className="hover:text-blue-400 transition-colors block py-1">{translations['nav.services'] || 'Services'}</Link></li>
+              <li><Link href="/portfolio" className="hover:text-blue-400 transition-colors block py-1">{translations['nav.portfolio'] || 'Portfolio'}</Link></li>
+              <li><Link href="/blog" className="hover:text-blue-400 transition-colors block py-1">{translations['nav.blog'] || 'Blog'}</Link></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg md:text-xl font-bold mb-4">Services</h3>
+            <h3 className="text-lg md:text-xl font-bold mb-4">{translations['services.title'] || 'Services'}</h3>
             <ul className="space-y-2 text-sm md:text-base text-gray-300">
-              <li><Link href="/services#livestreaming" className="hover:text-blue-400 transition-colors block py-1">Live Streaming</Link></li>
-              <li><Link href="/services#mediaproduction" className="hover:text-blue-400 transition-colors block py-1">Media Production</Link></li>
-              <li><Link href="/services#digitalmarketing" className="hover:text-blue-400 transition-colors block py-1">Digital Marketing</Link></li>
-              <li><Link href="/services#eventmanagement" className="hover:text-blue-400 transition-colors block py-1">Event Management</Link></li>
-              <li><Link href="/esports" className="hover:text-blue-400 transition-colors block py-1">Esports Services</Link></li>
+              <li><Link href="/services#webdev" className="hover:text-blue-400 transition-colors block py-1">{translations['services.webdev'] || 'Web Development'}</Link></li>
+              <li><Link href="/services#webdesign" className="hover:text-blue-400 transition-colors block py-1">{translations['services.webdesign'] || 'Web Design'}</Link></li>
+              <li><Link href="/services#branding" className="hover:text-blue-400 transition-colors block py-1">{translations['services.branding'] || 'Branding'}</Link></li>
+              <li><Link href="/services#marketing" className="hover:text-blue-400 transition-colors block py-1">{translations['services.marketing'] || 'Digital Marketing'}</Link></li>
+              <li><Link href="/services#ecommerce" className="hover:text-blue-400 transition-colors block py-1">{translations['services.ecommerce'] || 'E-commerce Solutions'}</Link></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg md:text-xl font-bold mb-4">Contact Us</h3>
+            <h3 className="text-lg md:text-xl font-bold mb-4">{translations['nav.contact'] || 'Contact Us'}</h3>
             <ul className="space-y-3 text-sm md:text-base text-gray-300">
               <li className="flex items-center gap-2">
                 <MapPin size={16} className="flex-shrink-0" />
@@ -104,11 +107,11 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-800 mt-8 md:mt-12 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-gray-400">&copy; {currentYear} ABC Studios. All rights reserved.</p>
+          <p className="text-sm text-gray-400">&copy; {currentYear} ABC Studios. {translations['footer.rights'] || 'All rights reserved.'}</p>
           <div className="mt-4 md:mt-0">
             <ul className="flex space-x-4 text-sm text-gray-400">
-              <li><Link href="/privacy" className="hover:text-blue-400 transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="hover:text-blue-400 transition-colors">Terms of Service</Link></li>
+              <li><Link href="/privacy" className="hover:text-blue-400 transition-colors">{translations['footer.privacy'] || 'Privacy Policy'}</Link></li>
+              <li><Link href="/terms" className="hover:text-blue-400 transition-colors">{translations['footer.terms'] || 'Terms of Service'}</Link></li>
             </ul>
           </div>
         </div>

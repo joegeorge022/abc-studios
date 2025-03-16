@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, PlayCircle, Tv, Camera, BarChart, Calendar, Trophy } from "lucide-react";
+import { ChevronRight, PlayCircle, Tv, Camera, BarChart, Calendar, Trophy, ArrowRight } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
+import { useLanguage } from "@/utils/languageContext";
 
 export default function Home() {
   const firstTextRef = useRef(null);
@@ -14,6 +15,7 @@ export default function Home() {
   const [isFirstHovered, setIsFirstHovered] = useState(false);
   const [isSecondHovered, setIsSecondHovered] = useState(false);
   const [isThirdHovered, setIsThirdHovered] = useState(false);
+  const { translations } = useLanguage();
   
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -86,54 +88,39 @@ export default function Home() {
             className="max-w-3xl"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Bringing Your Vision to Life
+              {translations['hero.title'] || 'Bringing Your Digital Vision to Life'}
             </h1>
             <p className="text-xl text-white/90 mb-8">
-              ABC Studios specializes in live streaming, media production, digital marketing, event management and Esports services.
+              {translations['hero.subtitle'] || 'We create stunning digital solutions that transform businesses'}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
+            <div className="flex flex-wrap gap-4">
+              <Link 
+                href="/contact"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full inline-flex items-center font-medium transition-colors"
               >
-                <Link 
-                  href="/contact" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full inline-flex items-center font-medium text-lg transition-colors"
-                >
-                  Contact Us <ChevronRight className="ml-2" size={18} />
-                </Link>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
+                {translations['hero.cta'] || 'Get Started'} <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+              <a 
+                href="#services"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm px-6 py-3 rounded-full inline-flex items-center font-medium transition-colors"
               >
-                <Link 
-                  href="/portfolio" 
-                  className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full inline-flex items-center font-medium text-lg hover:bg-white/10 transition-colors"
-                >
-                  Our Work <PlayCircle className="ml-2" size={18} />
-                </Link>
-              </motion.div>
+                {translations['hero.learnMore'] || 'Learn More'} <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
             </div>
           </motion.div>
-          
-          {/* Scroll down indicator */}
-          <motion.div 
-            className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white flex flex-col items-center"
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: 1,
-              y: [0, 10, 0]
-            }}
-            transition={{ 
-              delay: 1.5,
+        </div>
+        
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-white/70">
+          <span className="text-sm font-light mb-2">SCROLL</span>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{
               duration: 2,
               repeat: Infinity,
               repeatType: "loop"
             }}
           >
-            <span className="text-sm mb-2 font-light tracking-wider">SCROLL</span>
-            <ChevronRight size={24} className="rotate-90" />
+            <ArrowRight className="transform rotate-90 w-5 h-5" />
           </motion.div>
         </div>
       </section>
@@ -450,7 +437,7 @@ export default function Home() {
       </section>
       
       {/* Esports Section */}
-      <section className="py-24 relative overflow-hidden">
+      <section id="esports" className="py-24 bg-gradient-to-br from-gray-900 via-blue-950 to-indigo-950 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-blue-900 to-purple-950">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{ 
@@ -496,7 +483,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                Esports Services
+                {translations['services.title'] || 'Esports Services'}
               </motion.h2>
               
               <motion.p 
@@ -506,7 +493,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Take your gaming experience to the next level with our comprehensive Esports services. Register for events, connect with players, and compete for glory.
+                {translations['about.description'] || 'Take your gaming experience to the next level with our comprehensive Esports services. Register for events, connect with players, and compete for glory.'}
               </motion.p>
               
               <div className="space-y-5 mb-10">

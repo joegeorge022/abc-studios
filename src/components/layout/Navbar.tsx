@@ -7,23 +7,26 @@ import { Menu, X, LogIn, UserPlus, User, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import UserWrapper from "./UserWrapper";
-
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "About Us", path: "/about" },
-  { name: "Services", path: "/services" },
-  { name: "Portfolio", path: "/portfolio" },
-  { name: "Blog", path: "/blog" },
-  { name: "Esports", path: "/esports" },
-  { name: "Join Us", path: "/careers" },
-  { name: "Contact", path: "/contact" },
-];
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "@/utils/languageContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { translations } = useLanguage();
   
   const userProfileUrl = process.env.NEXT_PUBLIC_CLERK_USER_PROFILE || "https://polite-leopard-52.accounts.dev/user";
+
+  const navLinks = [
+    { name: translations['nav.home'] || 'Home', path: "/" },
+    { name: translations['nav.about'] || 'About Us', path: "/about" },
+    { name: translations['nav.services'] || 'Services', path: "/services" },
+    { name: translations['nav.portfolio'] || 'Portfolio', path: "/portfolio" },
+    { name: translations['nav.blog'] || 'Blog', path: "/blog" },
+    { name: translations['nav.esports'] || 'Esports', path: "/esports" },
+    { name: translations['nav.joinUs'] || 'Join Us', path: "/careers" },
+    { name: translations['nav.contact'] || 'Contact', path: "/contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +54,7 @@ export default function Navbar() {
             </Link>
           </div>
           
-          <nav className="hidden md:flex space-x-4 lg:space-x-6 items-center">
+          <nav className="hidden md:flex space-x-2 lg:space-x-4 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -62,14 +65,18 @@ export default function Navbar() {
               </Link>
             ))}
             
-            <div className="pl-2 border-l border-gray-300 dark:border-gray-700">
+            <div className="pl-2 border-l border-gray-300 dark:border-gray-700 flex items-center">
+              <div className="mr-3">
+                <LanguageSwitcher />
+              </div>
+              
               <SignedIn>
                 <UserWrapper>
                   {({ isLoaded, isSignedIn, user }) => (
                     <div className="flex items-center space-x-4">
                       <Link href="/dashboard" className={`flex items-center font-medium ${scrolled ? 'text-gray-800 dark:text-white' : 'text-white'} hover:text-blue-500 dark:hover:text-blue-300 transition-colors text-sm py-2`}>
                         <User className="w-4 h-4 mr-1" />
-                        Dashboard
+                        {translations['nav.dashboard'] || 'Dashboard'}
                       </Link>
                       <UserButton 
                         appearance={{
@@ -87,24 +94,29 @@ export default function Navbar() {
                 <div className="flex space-x-2">
                   <Link href="/sign-in" className={`flex items-center font-medium ${scrolled ? 'text-gray-800 dark:text-white' : 'text-white'} hover:text-blue-500 dark:hover:text-blue-300 transition-colors text-sm py-2`}>
                     <LogIn className="w-4 h-4 mr-1" />
-                    Sign In
+                    {translations['nav.signIn'] || 'Sign In'}
                   </Link>
                   <Link href="/sign-up" className="flex items-center text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-full transition-colors">
                     <UserPlus className="w-4 h-4 mr-1" />
-                    Sign Up
+                    {translations['nav.signUp'] || 'Sign Up'}
                   </Link>
                 </div>
               </SignedOut>
             </div>
           </nav>
           
-          <button
-            className="md:hidden p-2 text-white flex items-center justify-center w-8 h-8 focus:outline-none focus:ring-2 focus:ring-white/20 rounded-md mr-1"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="flex items-center md:hidden">
+            <div className="mr-2">
+              <LanguageSwitcher />
+            </div>
+            <button
+              className="p-2 text-white flex items-center justify-center w-8 h-8 focus:outline-none focus:ring-2 focus:ring-white/20 rounded-md"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -149,7 +161,7 @@ export default function Navbar() {
                         onClick={() => setIsOpen(false)}
                       >
                         <User className="w-5 h-5 mr-2" />
-                        Dashboard
+                        {translations['nav.dashboard'] || 'Dashboard'}
                       </Link>
                     </>
                   )}
@@ -162,7 +174,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   <LogIn className="w-5 h-5 mr-2" />
-                  Sign In
+                  {translations['nav.signIn'] || 'Sign In'}
                 </Link>
                 <Link
                   href="/sign-up"
@@ -170,7 +182,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   <UserPlus className="w-5 h-5 mr-2" />
-                  Sign Up
+                  {translations['nav.signUp'] || 'Sign Up'}
                 </Link>
               </SignedOut>
             </div>
