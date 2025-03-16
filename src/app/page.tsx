@@ -101,7 +101,7 @@ export default function Home() {
                 {translations['hero.cta'] || 'Get Started'} <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <a 
-                href="#services"
+                href="/services"
                 className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-sm px-6 py-3 rounded-full inline-flex items-center font-medium transition-colors"
               >
                 {translations['hero.learnMore'] || 'Learn More'} <ArrowRight className="ml-2 h-5 w-5" />
