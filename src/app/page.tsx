@@ -584,25 +584,48 @@ export default function Home() {
       </section>
       
       {/* CTAs */}
-      <section className="py-24 bg-white dark:bg-black">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <section className="py-24 bg-gradient-to-b from-white via-gray-50 to-white dark:from-black dark:via-gray-900 dark:to-black relative overflow-hidden">
+        {/* Abstract shapes for visual interest */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-40">
+          <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-blue-500/10 blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-80 h-80 rounded-full bg-purple-500/10 blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/3 w-72 h-72 rounded-full bg-indigo-500/10 blur-2xl"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-blue-50 dark:bg-blue-900/20 p-10 rounded-2xl"
+              className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/20 p-10 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-blue-100/80 dark:border-blue-800/30 backdrop-blur-sm relative overflow-hidden group"
             >
-              <h3 className="text-2xl font-bold mb-4">Ready to start your project?</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+              <div className="absolute -right-20 -top-20 w-40 h-40 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all duration-700"></div>
+              <div className="absolute right-5 bottom-5 text-blue-500/20 dark:text-blue-300/10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+                </svg>
+              </div>
+              <div className="flex items-center mb-6">
+                <div className="p-3 bg-blue-600 rounded-xl text-white mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z"></path><path d="m12 2 3.5 3.5L12 9 8.5 5.5 12 2Z"></path><path d="M18.5 8.5 22 12l-3.5 3.5L15 12l3.5-3.5Z"></path><path d="m12 15 3.5 3.5L12 22l-3.5-3.5L12 15Z"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold">Ready to start your project?</h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-8 ml-[52px]">
                 Contact us today to discuss your requirements and get a free quote.
               </p>
               <Link 
                 href="/contact" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full inline-flex items-center font-medium transition-colors"
+                className="ml-[52px] group bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-full inline-flex items-center font-medium transition-all"
               >
                 Get in Touch
+                <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                </svg>
               </Link>
             </motion.div>
             
@@ -611,21 +634,37 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-gray-50 dark:bg-gray-900/50 p-10 rounded-2xl"
+              className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/30 dark:to-pink-900/20 p-10 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-purple-100/80 dark:border-purple-800/30 backdrop-blur-sm relative overflow-hidden group"
             >
-              <h3 className="text-2xl font-bold mb-4">Want to join our team?</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+              <div className="absolute -left-20 -bottom-20 w-40 h-40 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all duration-700"></div>
+              <div className="absolute right-5 bottom-5 text-purple-500/20 dark:text-purple-300/10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div className="flex items-center mb-6">
+                <div className="p-3 bg-purple-600 rounded-xl text-white mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold">Want to join our team?</h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 mb-8 ml-[52px]">
                 Explore career opportunities and be part of our creative journey.
               </p>
               <Link 
                 href="/careers" 
-                className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-3 rounded-full inline-flex items-center font-medium transition-colors"
+                className="ml-[52px] group bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-full inline-flex items-center font-medium transition-all"
               >
                 View Openings
+                <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
+                </svg>
               </Link>
             </motion.div>
           </div>
-    </div>
+        </div>
       </section>
     </>
   );
