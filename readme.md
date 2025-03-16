@@ -22,6 +22,7 @@
 - [Key Features](#-key-features)
 - [Design & Performance](#-design--performance)
 - [Roadmap](#-roadmap)
+- [Citations](#-citations)
 
 ## 🚀 Project Overview
 
@@ -83,12 +84,12 @@ ABC Studios is a comprehensive digital production platform that combines modern 
 - TypeScript for type safety
 - Server and Client Components
 
-### 🎨 Rich UI/UX
+### 🎨 UI/UX
 - TailwindCSS with custom theming
 - GSAP animations and Framer Motion transitions
 - Responsive design across all devices
 
-### 🗄️ Robust Backend
+### 🗄️ Backend
 - Supabase (PostgreSQL) database
 - Server actions for secure form submissions
 - Optimized data fetching with SWR
@@ -123,14 +124,18 @@ ABC Studios is a comprehensive digital production platform that combines modern 
   <div style="display: flex; justify-content: center; gap: 20px;">
     <div>
       <p><b>Desktop Performance</b></p>
-      <img width="360" alt="Desktop Lighthouse Score" src="https://github.com/user-attachments/assets/ef563238-470f-4d01-85ed-416d134b70e7" />
+      <img width="600" alt="Desktop Lighthouse Score" src="https://github.com/user-attachments/assets/ef563238-470f-4d01-85ed-416d134b70e7" />
     </div>
     <div>
       <p><b>Mobile Performance</b></p>
-      <img width="360" alt="Mobile Lighthouse Score" src="https://github.com/user-attachments/assets/015327cd-238b-45a4-b08b-3ee0fbe4956c" />
+      <img width="600" alt="Mobile Lighthouse Score" src="https://github.com/user-attachments/assets/015327cd-238b-45a4-b08b-3ee0fbe4956c" />
     </div>
   </div>
 </div>
+
+> *"We managed to attain "*
+
+
 
 ### 🎭 Design Philosophy
 
@@ -147,9 +152,9 @@ ABC Studios is a comprehensive digital production platform that combines modern 
 ### 🚧 Current Limitations
 - YouTube API quota restrictions
 - Pre-defined fallback content for API limits
+- Payment processing for tournament registration. (None of our teammates had pan card's to setup razorpay)
 
 ### 🔮 In Progress
-- Payment processing for tournament registration
 - Enhanced authentication for esports events
 - Matchmaking system for participants
 - Multi-language support
