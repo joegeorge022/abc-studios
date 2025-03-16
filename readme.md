@@ -76,18 +76,7 @@ ABC Studios is a comprehensive digital production platform that combines modern 
 
 ### Technology Stack Overview
 
-| Category | Technologies |
-|----------|-------------|
-| **Frontend** | Next.js 14, React 18, TypeScript |
-| **Animations and UI/UX effects** | GSAP, Framer Motion |
-| **Styling** | TailwindCSS, CSS Modules, CSS Variables |
-| **Backend** | Supabase (PostgreSQL), REST API, Server Actions |
-| **Authentication** | Basic Auth, Environment Variables, Middleware |
-| **External APIs** | YouTube Data API v3,GROQ API, Google Maps API  |
-| **AI/ML** | Llama3 70B parameter model chatbot |
-| **Tooling** | ESLint, TypeScript, npm, Git, Prettier |
-| **Deployment** | [Vercel](https://abc-studios.vercel.app/) |
-| **Authentication** | HTTP authentication to access admin tab. |
+## 📚 Detailed Technologies
 
 <details>
 <summary><b>🖥️ Frontend Framework</b></summary>
