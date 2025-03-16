@@ -19,7 +19,8 @@ import {
   Clock,
   User,
   UserCheck,
-  Shield
+  Shield,
+  X
 } from 'lucide-react';
 import { fetchLiveStreamsByGame, convertYouTubeStreamToComponentStream } from '@/utils/youtube';
 
@@ -49,70 +50,79 @@ type ChatUser = {
   isOnline: boolean;
 };
 
+const fallbackVideos = {
+  "Valorant": "https://www.youtube.com/embed/JOgBVNhRUu4?autoplay=0",
+  "Fortnite": "https://www.youtube.com/embed/NTXD_aIJcO4?autoplay=0",
+  "League of Legends": "https://www.youtube.com/embed/bJ5ClftUcBI?autoplay=0",
+  "Call of Duty Warzone": "https://www.youtube.com/embed/h5EbYQbpEIs?autoplay=0", 
+  "Rocket League": "https://www.youtube.com/embed/KQk2xpvRUNA?autoplay=0",
+  "Overwatch": "https://www.youtube.com/embed/blKzPs4JDOk?autoplay=0"
+};
+
 const defaultStreams: Stream[] = [
   {
-    id: "stream1",
+    id: "valorant-1",
     title: "GX vs. ZER - Game Changers EMEA 2025 Stage 1",
     game: "Valorant",
-    viewers: 8723,
-    streamer: "ValorantEsports",
-    thumbnailUrl: "/images/esports/game1.jpg",
-    videoUrl: "https://www.youtube.com/embed/cM-UvKb_JF8?autoplay=0",
+    viewers: 45678,
+    streamer: "VALORANT Champions Tour",
+    thumbnailUrl: "/images/esports/game1.jpg", 
+    videoUrl: fallbackVideos["Valorant"]
   },
   {
-    id: "stream2",
+    id: "fortnite-1",
     title: "Fortnite Live Event! (Operation Skyfire Aftermath)",
     game: "Fortnite",
-    viewers: 86281,
-    streamer: "FortniteOfficial",
+    viewers: 32456,
+    streamer: "Epic Games",
     thumbnailUrl: "/images/esports/game2.jpg",
-    videoUrl: "https://www.youtube.com/embed/mMBDMRVnLcs?autoplay=0",
+    videoUrl: fallbackVideos["Fortnite"]
   },
   {
-    id: "stream3",
+    id: "lol-1",
     title: "LIVE | MPL LATAM Season 3 MLBB | Swiss Stage - Day 1",
     game: "League of Legends",
-    viewers: 25137,
-    streamer: "LeagueOfLegends",
+    viewers: 67890,
+    streamer: "Riot Games",
     thumbnailUrl: "/images/esports/game3.jpg",
-    videoUrl: "https://www.youtube.com/embed/YrEQJ6Qy5a4?autoplay=0",
+    videoUrl: fallbackVideos["League of Legends"]
   },
   {
-    id: "stream4",
-    title: "Gameplay de CS2 no PREMIER // LIVE de CS2",
+    id: "cod-1",
+    title: "Call of Duty League Championship - Day 2",
     game: "Call of Duty Warzone",
-    viewers: 154,
-    streamer: "CallOfDutyLeague",
+    viewers: 28945,
+    streamer: "Call of Duty League",
     thumbnailUrl: "/images/esports/game4.jpg",
-    videoUrl: "https://www.youtube.com/embed/xhYQsLZ3X4c?autoplay=0",
+    videoUrl: fallbackVideos["Call of Duty Warzone"]
   },
   {
-    id: "stream5",
-    title: "LIVE GIVING ROCKET LEAGUE CREDITS OR FENNECS",
+    id: "rocket-1",
+    title: "RLCS World Championship - European Finals",
     game: "Rocket League",
-    viewers: 67,
-    streamer: "RocketLeagueOfficial",
+    viewers: 19876,
+    streamer: "Rocket League Esports",
     thumbnailUrl: "/images/esports/game5.jpg",
-    videoUrl: "https://www.youtube.com/embed/YNGp_FEZ8yU?autoplay=0",
+    videoUrl: fallbackVideos["Rocket League"]
   },
   {
-    id: "stream6",
-    title: "LIVE | XYZ spielt Apex Legends Ranked",
+    id: "overwatch-1",
+    title: "Overwatch League 2025 - Seoul Dynasty vs. San Francisco Shock",
     game: "Overwatch",
-    viewers: 942,
-    streamer: "OverwatchLeague",
+    viewers: 23789,
+    streamer: "Overwatch League",
     thumbnailUrl: "/images/esports/game6.jpg",
-    videoUrl: "https://www.youtube.com/embed/hLDQVvX9aJk?autoplay=0",
+    videoUrl: fallbackVideos["Overwatch"]
   }
 ];
 
 const gamesToFetch = [
-  { name: "Valorant", default: defaultStreams[0] },
-  { name: "Fortnite", default: defaultStreams[1] },
-  { name: "League of Legends", default: defaultStreams[2] },
-  { name: "Call of Duty Warzone", default: defaultStreams[3] },
-  { name: "Rocket League", default: defaultStreams[4] },
-  { name: "Overwatch", default: defaultStreams[5] }
+  { name: "Valorant", default: defaultStreams.find(s => s.game === "Valorant")! },
+  { name: "Fortnite", default: defaultStreams.find(s => s.game === "Fortnite")! },
+  { name: "League of Legends", default: defaultStreams.find(s => s.game === "League of Legends")! },
+  { name: "Call of Duty Warzone", default: defaultStreams.find(s => s.game === "Call of Duty Warzone")! },
+  { name: "Rocket League", default: defaultStreams.find(s => s.game === "Rocket League")! },
+  { name: "Overwatch", default: defaultStreams.find(s => s.game === "Overwatch")! }
 ];
 
 const generateId = () => Math.random().toString(36).substring(2, 15);
@@ -205,7 +215,7 @@ export default function VideoStream() {
     }
   ]);
   const [newMessage, setNewMessage] = useState("");
-  const [showChat, setShowChat] = useState(true);
+  const [showChat, setShowChat] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [chatTab, setChatTab] = useState<'chat' | 'users'>('chat');
@@ -224,94 +234,83 @@ export default function VideoStream() {
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const fetchLiveStreams = async () => {
-    if (apiLimitReached) {
-      setError("YouTube API quota limit has been reached. Using default content instead.");
-      return;
-    }
-    
-    setIsLoading(true);
-    setError(null);
-    
     try {
-      const streamPromises = gamesToFetch.map(async (game) => {
-        try {
-          const response = await fetchLiveStreamsByGame(game.name);
-          
-          if (response.streams.length > 0) {
-            return convertYouTubeStreamToComponentStream(
-              response.streams[0], 
-              game.name, 
-              game.default.thumbnailUrl
-            );
-          } else {
-            return game.default;
+      setFeaturedStreams(defaultStreams);
+      
+      if (apiLimitReached) {
+        setError(null);
+        return;
+      }
+      
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const streamPromises = gamesToFetch.map(async (game) => {
+          try {
+            const response = await fetchLiveStreamsByGame(game.name);
+            
+            if (response.streams.length > 0) {
+              const stream = convertYouTubeStreamToComponentStream(
+                response.streams[0], 
+                game.name, 
+                game.default.thumbnailUrl
+              );
+              return stream;
+            } else {
+              return {
+                ...game.default,
+                viewers: game.default.viewers + Math.floor(Math.random() * 1000) - 500
+              };
+            }
+          } catch (err) {
+            console.error(`Error fetching streams for ${game.name}:`, err);
+            return {
+              ...game.default,
+              viewers: game.default.viewers + Math.floor(Math.random() * 1000) - 500
+            };
           }
-        } catch (err) {
-          console.error(`Error fetching streams for ${game.name}:`, err);
-          return game.default;
-        }
-      });
-      
-      const fetchedStreams = await Promise.all(streamPromises);
-      
-      const hasNewStreams = fetchedStreams.some(stream => 
-        !defaultStreams.find(ds => ds.game === stream.game && ds.id === stream.id)
-      );
-      
-      if (hasNewStreams) {
+        });
+        
+        const fetchedStreams = await Promise.all(streamPromises);
+        
         setFeaturedStreams(fetchedStreams);
         
-        const newMessage: ChatMessage = {
-          id: generateId(),
-          user: "TournamentAdmin",
-          userType: "admin",
-          message: "Live streams have been updated with the latest content!",
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          color: getUserTypeBaseColor('admin')
-        };
+        const allFallbacks = fetchedStreams.every(stream => 
+          defaultStreams.some(ds => ds.id === stream.id)
+        );
         
-        setChatMessages(prev => [...prev, newMessage]);
-      } else {
+        if (allFallbacks) {
+          setApiLimitReached(true);
+          
+          const systemMessage: ChatMessage = {
+            id: generateId(),
+            user: "System",
+            userType: "system",
+            message: "Using featured content. Live data unavailable.",
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            color: getUserTypeBaseColor('system')
+          };
+          
+          setChatMessages(prev => [...prev, systemMessage]);
+        } else {
+          const newMessage: ChatMessage = {
+            id: generateId(),
+            user: "TournamentAdmin",
+            userType: "admin",
+            message: "Live streams have been updated with the latest content!",
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            color: getUserTypeBaseColor('admin')
+          };
+          
+          setChatMessages(prev => [...prev, newMessage]);
+        }
+      } catch (err) {
+        console.error('Error in main fetch function:', err);
         setApiLimitReached(true);
-        setError("No new live streams found. Using default content instead.");
       }
-    } catch (err) {
-      console.error('Error fetching live streams:', err);
-      setApiLimitReached(true);
-      setError('YouTube API quota limit reached. Using default content instead.');
-      
-      const errorMessage: ChatMessage = {
-        id: generateId(),
-        user: "System",
-        userType: "system",
-        message: "Unable to fetch live streams. Using featured content instead.",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        color: getUserTypeBaseColor('system')
-      };
-      
-      setChatMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
-    }
-  };
-  
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-  };
-  
-  const toggleFullScreen = () => {
-    if (!videoContainerRef.current) return;
-    
-    if (!isFullScreen) {
-      if (videoContainerRef.current.requestFullscreen) {
-        videoContainerRef.current.requestFullscreen();
-        setIsFullScreen(true);
-      }
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-        setIsFullScreen(false);
-      }
     }
   };
   
@@ -492,27 +491,43 @@ export default function VideoStream() {
   
   return (
     <section className="py-16 bg-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-3 sm:px-6 lg:px-8">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-3xl mx-auto text-center mb-12"
+          className="max-w-3xl mx-auto text-center mb-8 sm:mb-12"
         >
           <h2 className="text-3xl font-bold mb-4 text-white">Live Esports Streams</h2>
           <p className="text-gray-300">
             Watch tournaments, gameplay, and exclusive ABC Studios esports content
           </p>
-          <button 
-            onClick={fetchLiveStreams} 
-            disabled={isLoading}
-            className="mt-4 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800/50 px-4 py-2 rounded-lg text-white transition-colors"
-          >
-            <RefreshCw size={16} className={`${isLoading ? 'animate-spin' : ''}`} />
-            {isLoading ? 'Refreshing...' : apiLimitReached ? 'API Limit Reached' : 'Load Live Streams'}
-          </button>
-          {error && <p className="mt-2 text-red-400 text-sm">{error}</p>}
+          <div className="flex items-center justify-center relative mt-4">
+            <button 
+              className={`inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800/50 px-4 py-2 rounded-lg text-white transition-colors ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+              onClick={fetchLiveStreams}
+              disabled={isLoading}
+            >
+              <RefreshCw size={16} className={`${isLoading ? 'animate-spin' : ''}`} />
+              {isLoading ? 'Refreshing...' : 'Refresh Streams'}
+            </button>
+            {apiLimitReached && (
+              <span className="absolute right-0 top-1/2 -translate-y-1/2 text-amber-400 text-xs flex items-center">
+                <span className="inline-block w-2 h-2 rounded-full bg-amber-500 mr-2"></span>
+                Using featured content
+              </span>
+            )}
+          </div>
+          {error && (
+            <div className="mt-2 p-2 bg-red-900/20 border border-red-500/30 rounded text-red-300 text-sm">
+              <p className="flex items-start">
+                <span className="mr-2 mt-0.5">⚠️</span>
+                <span>{error}</span>
+              </p>
+              <p className="text-xs mt-1 ml-6 text-red-300/70">Default streams are being displayed instead.</p>
+            </div>
+          )}
         </motion.div>
         
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -537,22 +552,34 @@ export default function VideoStream() {
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
                   <div className="flex justify-between items-center">
                     <div>
-                      <h3 className="text-white font-bold text-lg">{activeStream.title}</h3>
-                      <p className="text-gray-300 text-sm flex items-center gap-2">
+                      <h3 className="text-white font-bold text-lg md:text-xl truncate">{activeStream.title}</h3>
+                      <p className="text-gray-300 text-xs sm:text-sm flex items-center gap-2">
                         <span className="bg-red-600 text-white px-2 py-0.5 text-xs rounded">LIVE</span>
                         {activeStream.game} • {activeStream.streamer}
                       </p>
                     </div>
                     <div className="flex items-center gap-3">
                       <button 
-                        onClick={toggleMute}
+                        onClick={() => setIsMuted(!isMuted)}
                         className="text-white hover:text-blue-400 transition-colors"
                         aria-label={isMuted ? "Unmute" : "Mute"}
                       >
                         {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
                       </button>
                       <button 
-                        onClick={toggleFullScreen}
+                        onClick={() => {
+                          if (!videoContainerRef.current) return;
+                          
+                          if (!isFullScreen) {
+                            if (videoContainerRef.current.requestFullscreen) {
+                              videoContainerRef.current.requestFullscreen();
+                            }
+                          } else {
+                            if (document.exitFullscreen) {
+                              document.exitFullscreen();
+                            }
+                          }
+                        }}
                         className="text-white hover:text-blue-400 transition-colors"
                         aria-label={isFullScreen ? "Exit fullscreen" : "Enter fullscreen"}
                       >
@@ -571,9 +598,9 @@ export default function VideoStream() {
                   </div>
                   <button
                     onClick={() => setShowChat(!showChat)}
-                    className="lg:hidden flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
+                    className="md:hidden flex items-center gap-1 text-gray-300 hover:text-white transition-colors px-3 py-1 rounded-md border border-gray-700"
                   >
-                    <MessageSquare size={18} />
+                    <MessageSquare size={16} />
                     <span>{showChat ? "Hide" : "Show"} Chat</span>
                   </button>
                 </div>
@@ -581,7 +608,7 @@ export default function VideoStream() {
             </motion.div>
           </div>
           
-          <div className={`lg:block ${showChat ? 'block' : 'hidden'}`}>
+          <div className={`md:block ${showChat ? 'block mt-4 md:mt-0' : 'hidden'}`}>
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -596,7 +623,16 @@ export default function VideoStream() {
               <div className="p-1 bg-gray-750 border-b border-gray-700 flex-shrink-0">
                 <div className="flex justify-between items-center">
                   <h3 className="text-white font-medium text-base">Live Chat</h3>
-                  <div className="text-gray-400 text-sm">{onlineUsers.filter(u => u.isOnline).length} online</div>
+                  <div className="flex items-center gap-2">
+                    <div className="text-gray-400 text-sm">{onlineUsers.filter(u => u.isOnline).length} online</div>
+                    <button 
+                      onClick={() => setShowChat(false)}
+                      className="md:hidden text-gray-400 hover:text-white p-1"
+                      aria-label="Close chat"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
                 </div>
                 
                 <div className="flex border-b border-gray-700 -mx-3 px-1">
@@ -780,7 +816,7 @@ export default function VideoStream() {
                     className={`rounded-lg overflow-hidden relative flex-shrink-0 ${
                       activeStream.id === stream.id ? 'ring-2 ring-blue-500' : ''
                     }`}
-                    style={{ width: "340px" }}
+                    style={{ width: "280px", maxWidth: "90vw" }}
                   >
                     <div className="relative aspect-video">
                       <img 
@@ -805,6 +841,18 @@ export default function VideoStream() {
             <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-gray-900 to-transparent pointer-events-none"></div>
             <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-gray-900 to-transparent pointer-events-none"></div>
           </div>
+        </div>
+        
+        <div className="md:hidden mt-4 flex justify-center">
+          {!showChat && (
+            <button
+              onClick={() => setShowChat(true)}
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow-lg"
+            >
+              <MessageSquare size={16} />
+              <span>Open Chat</span>
+            </button>
+          )}
         </div>
       </div>
       <style jsx global>{`
@@ -832,6 +880,12 @@ export default function VideoStream() {
         
         .scrollbar-thin::-webkit-scrollbar-thumb:hover {
           background: rgba(55, 65, 81, 0.8);
+        }
+        
+        @media (max-width: 640px) {
+          .scrollbar-thin {
+            max-height: 300px !important;
+          }
         }
       `}</style>
     </section>

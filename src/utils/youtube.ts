@@ -28,15 +28,19 @@ export async function fetchLiveStreamsByGame(gameName: string, pageToken?: strin
       searchUrl.searchParams.append('pageToken', pageToken);
     }
 
+    console.log(`Fetching YouTube data with API key: ${YOUTUBE_API_KEY.substring(0, 5)}...`);
     const searchResponse = await fetch(searchUrl.toString());
     
     if (!searchResponse.ok) {
-      throw new Error(`YouTube API search error: ${searchResponse.statusText}`);
+      const errorData = await searchResponse.json().catch(() => ({}));
+      console.error('YouTube API Error Response:', errorData);
+      throw new Error(`YouTube API search error (${searchResponse.status}): ${errorData?.error?.message || searchResponse.statusText}`);
     }
     
     const searchData = await searchResponse.json();
     
     if (!searchData.items || searchData.items.length === 0) {
+      console.log('No live streams found for:', gameName);
       return { streams: [] };
     }
     
@@ -50,7 +54,9 @@ export async function fetchLiveStreamsByGame(gameName: string, pageToken?: strin
     const videoResponse = await fetch(videoUrl.toString());
     
     if (!videoResponse.ok) {
-      throw new Error(`YouTube API videos error: ${videoResponse.statusText}`);
+      const errorData = await videoResponse.json().catch(() => ({}));
+      console.error('YouTube Videos API Error Response:', errorData);
+      throw new Error(`YouTube API videos error (${videoResponse.status}): ${errorData?.error?.message || videoResponse.statusText}`);
     }
     
     const videoData = await videoResponse.json();
