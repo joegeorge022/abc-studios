@@ -138,17 +138,22 @@ export default function Home() {
         </div>
       </section>
       
-      <div className="h-24 bg-gradient-to-b from-black/95 to-black"></div>
+      {/* Transition to scrolling text section */}
+      <div className="h-6 bg-gradient-to-b from-black/95 to-black"></div>
       
-      <section className="bg-black pt-16 pb-16 overflow-hidden relative">
-        {/* Animated background particles/dots */}
+      <section className="bg-black pt-6 pb-16 overflow-hidden relative">
+        {/* Enhanced background elements */}
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-blue-500"></div>
-          <div className="absolute top-3/4 left-1/2 w-2 h-2 rounded-full bg-blue-300"></div>
-          <div className="absolute top-1/3 left-3/4 w-2 h-2 rounded-full bg-blue-400"></div>
-          <div className="absolute top-2/3 left-1/3 w-2 h-2 rounded-full bg-purple-500"></div>
-          <div className="absolute top-1/2 left-1/5 w-2 h-2 rounded-full bg-purple-300"></div>
-          <div className="absolute top-1/5 left-2/3 w-2 h-2 rounded-full bg-purple-400"></div>
+          <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
+          <div className="absolute top-3/4 left-1/2 w-2 h-2 rounded-full bg-blue-300 animate-pulse"></div>
+          <div className="absolute top-1/3 left-3/4 w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div>
+          <div className="absolute top-2/3 left-1/3 w-2 h-2 rounded-full bg-purple-500 animate-pulse"></div>
+          <div className="absolute top-1/2 left-1/5 w-2 h-2 rounded-full bg-purple-300 animate-pulse"></div>
+          <div className="absolute top-1/5 left-2/3 w-2 h-2 rounded-full bg-purple-400 animate-pulse"></div>
+          
+          {/* Additional decorative elements */}
+          <div className="absolute top-20 right-[10%] w-40 h-40 rounded-full bg-blue-500/5 blur-3xl"></div>
+          <div className="absolute bottom-10 left-[20%] w-40 h-40 rounded-full bg-purple-500/5 blur-3xl"></div>
         </div>
         
         <div className="relative">
