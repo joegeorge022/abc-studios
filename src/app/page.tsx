@@ -557,7 +557,7 @@ export default function Home() {
               className="relative"
             >
               <div className="relative z-10 rounded-xl overflow-hidden shadow-2xl shadow-purple-900/40 border border-indigo-500/20">
-                <Image
+          <Image
                   src="/esports.jpg"
                   alt="Esports Event"
                   width={600}

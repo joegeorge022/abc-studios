@@ -195,19 +195,26 @@ export default function ServicesPage() {
               >
                 <div className={`h-3 bg-gradient-to-r ${ColorClass[service.color].gradient}`} />
                 <div className="p-8">
-                  <div className={`${ColorClass[service.color].light} p-3 rounded-full w-fit mb-6`}>
-                    <service.icon size={28} />
-                  </div>
                   <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                  <div className="relative h-80 mb-6 rounded-lg overflow-hidden">
+                  
+                  <div className="relative h-80 mb-6 rounded-lg overflow-hidden group">
+                    {/* Main service image */}
                     <Image 
                       src={service.image} 
                       alt={service.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
+                    
+                    {/* Overlay on hover with animation */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className={`${ColorClass[service.color].light} p-10 rounded-full transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 ease-out`}>
+                        <service.icon size={48} />
+                      </div>
+                    </div>
                   </div>
+                  
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     {service.longDesc}
                   </p>
@@ -271,8 +278,22 @@ export default function ServicesPage() {
                 transition={{ duration: 0.7 }}
                 className={`order-1 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
               >
-                <div className={`aspect-video rounded-xl overflow-hidden bg-gradient-to-br ${ColorClass[service.color].gradient} flex items-center justify-center`}>
-                  <service.icon className="text-white opacity-20" size={120} />
+                <div className="rounded-xl overflow-hidden group relative aspect-video">
+                  {/* Service image */}
+                  <Image 
+                    src={service.image} 
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  
+                  {/* Gradient overlay with icon that shows on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/60 flex items-center justify-center transition-opacity duration-300">
+                    <div className="transform transition-all duration-500 group-hover:scale-125">
+                      <service.icon className="text-white opacity-20 group-hover:opacity-80 transition-opacity duration-500" size={120} />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
