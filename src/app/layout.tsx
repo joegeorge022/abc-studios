@@ -1,11 +1,12 @@
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Inter } from 'next/font/google';
 import AIChatWrapper from '@/components/AIChatWrapper';
 import AccessibilityControls from '@/components/layout/AccessibilityControls';
+import { ClerkProvider } from '@clerk/nextjs';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,6 +17,15 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: {
@@ -31,11 +41,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
-  ],
-  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     type: 'website',
     siteName: 'ABC Studios',
@@ -53,16 +58,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden w-full`}>
-        <Navbar />
-        <main className="min-h-screen overflow-x-hidden w-full">
-          {children}
-        </main>
-        <Footer />
-        <AIChatWrapper />
-        <AccessibilityControls />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden w-full`}>
+          <Navbar />
+          <main className="min-h-screen overflow-x-hidden w-full">
+            {children}
+          </main>
+          <Footer />
+          <AIChatWrapper />
+          <AccessibilityControls />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

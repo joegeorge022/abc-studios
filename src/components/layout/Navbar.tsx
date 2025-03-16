@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, UserPlus, User, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import UserWrapper from "./UserWrapper";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -20,6 +22,8 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  
+  const userProfileUrl = process.env.NEXT_PUBLIC_CLERK_USER_PROFILE || "https://polite-leopard-52.accounts.dev/user";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,16 +51,51 @@ export default function Navbar() {
             </Link>
           </div>
           
-          <nav className="hidden md:flex space-x-4 lg:space-x-8">
+          <nav className="hidden md:flex space-x-4 lg:space-x-6 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.path}
-                className="font-medium text-white dark:text-white hover:text-blue-300 dark:hover:text-blue-300 transition-colors text-sm lg:text-base py-2"
+                className={`font-medium ${scrolled ? 'text-gray-800 dark:text-white' : 'text-white'} hover:text-blue-500 dark:hover:text-blue-300 transition-colors text-sm lg:text-base py-2`}
               >
                 {link.name}
               </Link>
             ))}
+            
+            <div className="pl-2 border-l border-gray-300 dark:border-gray-700">
+              <SignedIn>
+                <UserWrapper>
+                  {({ isLoaded, isSignedIn, user }) => (
+                    <div className="flex items-center space-x-4">
+                      <Link href="/dashboard" className={`flex items-center font-medium ${scrolled ? 'text-gray-800 dark:text-white' : 'text-white'} hover:text-blue-500 dark:hover:text-blue-300 transition-colors text-sm py-2`}>
+                        <User className="w-4 h-4 mr-1" />
+                        Dashboard
+                      </Link>
+                      <UserButton 
+                        appearance={{
+                          elements: {
+                            userButtonAvatarBox: "w-9 h-9"
+                          }
+                        }}
+                        afterSignOutUrl="/"
+                      />
+                    </div>
+                  )}
+                </UserWrapper>
+              </SignedIn>
+              <SignedOut>
+                <div className="flex space-x-2">
+                  <Link href="/sign-in" className={`flex items-center font-medium ${scrolled ? 'text-gray-800 dark:text-white' : 'text-white'} hover:text-blue-500 dark:hover:text-blue-300 transition-colors text-sm py-2`}>
+                    <LogIn className="w-4 h-4 mr-1" />
+                    Sign In
+                  </Link>
+                  <Link href="/sign-up" className="flex items-center text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-full transition-colors">
+                    <UserPlus className="w-4 h-4 mr-1" />
+                    Sign Up
+                  </Link>
+                </div>
+              </SignedOut>
+            </div>
           </nav>
           
           <button
@@ -88,6 +127,53 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            
+            <div className="border-t border-gray-200 dark:border-gray-700 mt-2 pt-2">
+              <SignedIn>
+                <UserWrapper>
+                  {({ isLoaded, isSignedIn, user }) => (
+                    <>
+                      <div className="flex items-center justify-between px-4 py-3">
+                        <div className="flex items-center">
+                          <UserButton appearance={{
+                            elements: {
+                              userButtonAvatarBox: "w-8 h-8"
+                            }
+                          }} />
+                          <span className="ml-2 text-gray-800 dark:text-white">{isLoaded && user?.fullName}</span>
+                        </div>
+                      </div>
+                      <Link
+                        href="/dashboard"
+                        className="flex items-center px-4 py-3 rounded-md text-base font-medium text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <User className="w-5 h-5 mr-2" />
+                        Dashboard
+                      </Link>
+                    </>
+                  )}
+                </UserWrapper>
+              </SignedIn>
+              <SignedOut>
+                <Link
+                  href="/sign-in"
+                  className="flex items-center px-4 py-3 rounded-md text-base font-medium text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <LogIn className="w-5 h-5 mr-2" />
+                  Sign In
+                </Link>
+                <Link
+                  href="/sign-up"
+                  className="flex items-center px-4 py-3 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors mx-4 mt-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <UserPlus className="w-5 h-5 mr-2" />
+                  Sign Up
+                </Link>
+              </SignedOut>
+            </div>
           </div>
         </motion.div>
       )}
