@@ -51,7 +51,7 @@ type ChatUser = {
 };
 
 const fallbackVideos = {
-  "Valorant": "https://www.youtube.com/embed/JOgBVNhRUu4?autoplay=0",
+  "Valorant": "https://www.youtube.com/embed/52s56rB-0Wo?autoplay=0",
   "Fortnite": "https://www.youtube.com/embed/NTXD_aIJcO4?autoplay=0",
   "League of Legends": "https://www.youtube.com/embed/bJ5ClftUcBI?autoplay=0",
   "Call of Duty Warzone": "https://www.youtube.com/embed/h5EbYQbpEIs?autoplay=0", 

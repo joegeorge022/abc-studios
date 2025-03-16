@@ -157,3 +157,18 @@ ABC Studios is a comprehensive digital production platform that combines modern 
 ### 📈 Future Plans
 - Enhanced animations using Framer Motion
 - Social media integration for content sharing
+
+## 📚 Citations
+
+- YouTube Data API v3 - https://developers.google.com/youtube/v3
+- GSAP (GreenSock Animation Platform) - https://gsap.com/
+- Framer Motion - https://motion.dev/
+- Tailwind CSS - https://tailwindcss.com/
+- Next.js Documentation - https://nextjs.org/docs
+- Supabase Documentation - https://supabase.com/docs
+- React Documentation - https://react.dev/
+- Lucide Icons - https://lucide.dev/
+- GROQ API - https://groq.com/
+- Google Maps API - https://developers.google.com/maps
+- SWR Data Fetching - https://swr.vercel.app/
+- Motion Accessibility Guidelines - https://motion.dev/docs/react-accessibility
