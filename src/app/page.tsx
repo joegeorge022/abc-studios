@@ -483,7 +483,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                {translations['services.title'] || 'Esports Services'}
+                Esports Services
               </motion.h2>
               
               <motion.p 
@@ -493,7 +493,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                {translations['about.description'] || 'Take your gaming experience to the next level with our comprehensive Esports services. Register for events, connect with players, and compete for glory.'}
+                Take your gaming experience to the next level with our comprehensive Esports services. We organize professional tournaments, provide live streaming with expert commentary, and create immersive competitive gaming environments.
               </motion.p>
               
               <div className="space-y-5 mb-10">
