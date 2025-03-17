@@ -79,11 +79,11 @@ export default function Footer() {
           <div>
             <h3 className="text-lg md:text-xl font-bold mb-4">{translations['services.title'] || 'Services'}</h3>
             <ul className="space-y-2 text-sm md:text-base text-gray-300">
-              <li><Link href="/services#webdev" className="hover:text-blue-400 transition-colors block py-1">{translations['services.webdev'] || 'Web Development'}</Link></li>
-              <li><Link href="/services#webdesign" className="hover:text-blue-400 transition-colors block py-1">{translations['services.webdesign'] || 'Web Design'}</Link></li>
-              <li><Link href="/services#branding" className="hover:text-blue-400 transition-colors block py-1">{translations['services.branding'] || 'Branding'}</Link></li>
-              <li><Link href="/services#marketing" className="hover:text-blue-400 transition-colors block py-1">{translations['services.marketing'] || 'Digital Marketing'}</Link></li>
-              <li><Link href="/services#ecommerce" className="hover:text-blue-400 transition-colors block py-1">{translations['services.ecommerce'] || 'E-commerce Solutions'}</Link></li>
+              <li><Link href="/services#livestreaming" className="hover:text-blue-400 transition-colors block py-1">{translations['services.livestreaming'] || 'Live Streaming'}</Link></li>
+              <li><Link href="/services#mediaproduction" className="hover:text-blue-400 transition-colors block py-1">{translations['services.mediaproduction'] || 'Media Production'}</Link></li>
+              <li><Link href="/services#digitalmarketing" className="hover:text-blue-400 transition-colors block py-1">{translations['services.digitalmarketing'] || 'Digital Marketing'}</Link></li>
+              <li><Link href="/services#eventmanagement" className="hover:text-blue-400 transition-colors block py-1">{translations['services.eventmanagement'] || 'Event Management'}</Link></li>
+              <li><Link href="/esports" className="hover:text-blue-400 transition-colors block py-1">{translations['services.esports'] || 'Esports'}</Link></li>
             </ul>
           </div>
           
