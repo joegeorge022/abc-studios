@@ -220,13 +220,31 @@ export default function Home() {
       </section>
       
       {/* Our Services Section */}
-      <section className="py-24 relative overflow-hidden bg-gradient-to-b from-gray-50 via-blue-50/30 to-indigo-50/20 dark:from-gray-900 dark:via-blue-950/30 dark:to-indigo-950/20">
+      <section className="py-24 relative overflow-hidden bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950">
         {/* Background pattern */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-20 left-20 w-64 h-64 rounded-full bg-blue-500/20 filter blur-3xl animate-pulse" style={{ animationDuration: '8s' }}></div>
-          <div className="absolute bottom-20 right-20 w-64 h-64 rounded-full bg-purple-500/20 filter blur-3xl animate-pulse" style={{ animationDuration: '12s', animationDelay: '2s' }}></div>
-          <div className="absolute top-1/3 right-1/4 w-44 h-44 rounded-full bg-indigo-500/10 filter blur-2xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }}></div>
-          <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"30\" height=\"30\" viewBox=\"0 0 30 30\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M0 15a15 15 0 0 0 15 15m0-30a15 15 0 0 1 15 15m-30 0h30M15 0v30\" stroke=\"%236366f1\" stroke-opacity=\".05\" fill=\"none\"/%3E%3C/svg%3E')" }}></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-[#090321] to-gray-950">
+          <div className="absolute inset-0 opacity-40">
+            <div className="absolute inset-0" style={{ 
+              backgroundImage: "linear-gradient(rgba(82, 0, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 240, 0.05) 1px, transparent 1px)",
+              backgroundSize: "30px 30px"
+            }}></div>
+          </div>
+          
+          {/* Animated dots/particles */}
+          <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-cyan-400 opacity-30 animate-pulse" style={{ filter: "blur(2px)", animationDuration: "3s" }}></div>
+          <div className="absolute top-3/4 left-1/2 w-6 h-6 rounded-full bg-violet-500 opacity-30 animate-pulse" style={{ filter: "blur(3px)", animationDuration: "4s", animationDelay: "1s" }}></div>
+          <div className="absolute top-2/4 left-3/4 w-5 h-5 rounded-full bg-fuchsia-400 opacity-40 animate-pulse" style={{ filter: "blur(2px)", animationDuration: "5s", animationDelay: "1.5s" }}></div>
+          
+          {/* Glowing lines */}
+          <div className="absolute inset-0 overflow-hidden opacity-10">
+            <div className="absolute top-1/3 -left-10 w-full h-[1px] bg-gradient-to-r from-transparent via-violet-500 to-transparent"></div>
+            <div className="absolute top-2/3 -left-10 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
+          </div>
+          
+          {/* Additional color layers */}
+          <div className="absolute -top-20 -left-20 w-60 h-60 bg-violet-600/10 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-cyan-600/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-900/5 rounded-full blur-3xl"></div>
         </div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -236,7 +254,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400"
+              className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-cyan-300 to-purple-400"
             >
               Our Services
             </motion.h2>
@@ -245,7 +263,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+              className="text-xl text-cyan-100 max-w-3xl mx-auto"
             >
               We offer a comprehensive range of media and event services to meet your needs
             </motion.p>
@@ -260,12 +278,12 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ 
                 y: -10,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
               }}
-              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-blue-100/50 dark:border-blue-800/30 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300"
+              className="bg-gradient-to-br from-gray-900/80 to-blue-900/20 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-blue-500/20 hover:border-blue-400/30 transition-all duration-300"
             >
               <motion.div 
-                className="bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-900/50 dark:to-blue-800/30 p-4 rounded-full w-fit mb-8"
+                className="bg-gradient-to-br from-blue-500/20 to-blue-600/10 p-4 rounded-full w-fit mb-8"
                 whileHover={{ scale: 1.05 }}
                 animate={{ 
                   boxShadow: ["0 0 0 0 rgba(59, 130, 246, 0.5)", "0 0 0 10px rgba(59, 130, 246, 0)"],
@@ -276,15 +294,15 @@ export default function Home() {
                   repeatType: "loop"
                 }}
               >
-                <Tv className="text-blue-600 dark:text-blue-400" size={32} />
+                <Tv className="text-blue-400" size={32} />
               </motion.div>
-              <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-700 to-blue-500 dark:from-blue-400 dark:to-blue-300">Live Streaming</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-blue-400">Live Streaming</h3>
+              <p className="text-cyan-100 mb-6">
                 Professional live streaming solutions for virtual and hybrid events, conferences, and more.
               </p>
               <Link 
                 href="/services#livestreaming" 
-                className="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center group"
+                className="text-blue-400 font-medium inline-flex items-center group"
               >
                 <span className="group-hover:underline">Learn more</span> 
                 <motion.span
@@ -305,12 +323,12 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.3 }}
               whileHover={{ 
                 y: -10,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
               }}
-              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-blue-100/50 dark:border-blue-800/30 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300"
+              className="bg-gradient-to-br from-gray-900/80 to-indigo-900/20 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-indigo-500/20 hover:border-indigo-400/30 transition-all duration-300"
             >
               <motion.div 
-                className="bg-gradient-to-br from-indigo-100 to-indigo-50 dark:from-indigo-900/50 dark:to-indigo-800/30 p-4 rounded-full w-fit mb-8"
+                className="bg-gradient-to-br from-indigo-500/20 to-indigo-600/10 p-4 rounded-full w-fit mb-8"
                 whileHover={{ scale: 1.05 }}
                 animate={{ 
                   boxShadow: ["0 0 0 0 rgba(79, 70, 229, 0.5)", "0 0 0 10px rgba(79, 70, 229, 0)"],
@@ -322,15 +340,15 @@ export default function Home() {
                   delay: 0.5
                 }}
               >
-                <Camera className="text-indigo-600 dark:text-indigo-400" size={32} />
+                <Camera className="text-indigo-400" size={32} />
               </motion.div>
-              <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-indigo-500 dark:from-indigo-400 dark:to-indigo-300">Media Production</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-indigo-400">Media Production</h3>
+              <p className="text-cyan-100 mb-6">
                 High-quality videography, photography, and video editing services for all types of projects.
               </p>
               <Link 
                 href="/services#mediaproduction" 
-                className="text-indigo-600 dark:text-indigo-400 font-medium inline-flex items-center group"
+                className="text-indigo-400 font-medium inline-flex items-center group"
               >
                 <span className="group-hover:underline">Learn more</span> 
                 <motion.span
@@ -351,12 +369,12 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.4 }}
               whileHover={{ 
                 y: -10,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
               }}
-              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-blue-100/50 dark:border-blue-800/30 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300"
+              className="bg-gradient-to-br from-gray-900/80 to-purple-900/20 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-purple-500/20 hover:border-purple-400/30 transition-all duration-300"
             >
               <motion.div 
-                className="bg-gradient-to-br from-purple-100 to-purple-50 dark:from-purple-900/50 dark:to-purple-800/30 p-4 rounded-full w-fit mb-8"
+                className="bg-gradient-to-br from-purple-500/20 to-purple-600/10 p-4 rounded-full w-fit mb-8"
                 whileHover={{ scale: 1.05 }}
                 animate={{ 
                   boxShadow: ["0 0 0 0 rgba(126, 34, 206, 0.5)", "0 0 0 10px rgba(126, 34, 206, 0)"],
@@ -368,15 +386,15 @@ export default function Home() {
                   delay: 1
                 }}
               >
-                <BarChart className="text-purple-600 dark:text-purple-400" size={32} />
+                <BarChart className="text-purple-400" size={32} />
               </motion.div>
-              <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-purple-500 dark:from-purple-400 dark:to-purple-300">Digital Marketing</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-300 to-purple-400">Digital Marketing</h3>
+              <p className="text-cyan-100 mb-6">
                 Comprehensive digital marketing solutions including social media management, SEO, and ad campaigns.
               </p>
               <Link 
                 href="/services#digitalmarketing" 
-                className="text-purple-600 dark:text-purple-400 font-medium inline-flex items-center group"
+                className="text-purple-400 font-medium inline-flex items-center group"
               >
                 <span className="group-hover:underline">Learn more</span> 
                 <motion.span
@@ -397,12 +415,12 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.5 }}
               whileHover={{ 
                 y: -10,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
               }}
-              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-blue-100/50 dark:border-blue-800/30 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300"
+              className="bg-gradient-to-br from-gray-900/80 to-violet-900/20 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-violet-500/20 hover:border-violet-400/30 transition-all duration-300"
             >
               <motion.div 
-                className="bg-gradient-to-br from-violet-100 to-violet-50 dark:from-violet-900/50 dark:to-violet-800/30 p-4 rounded-full w-fit mb-8"
+                className="bg-gradient-to-br from-violet-500/20 to-violet-600/10 p-4 rounded-full w-fit mb-8"
                 whileHover={{ scale: 1.05 }}
                 animate={{ 
                   boxShadow: ["0 0 0 0 rgba(124, 58, 237, 0.5)", "0 0 0 10px rgba(124, 58, 237, 0)"],
@@ -414,15 +432,15 @@ export default function Home() {
                   delay: 1.5
                 }}
               >
-                <Calendar className="text-violet-600 dark:text-violet-400" size={32} />
+                <Calendar className="text-violet-400" size={32} />
               </motion.div>
-              <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-violet-700 to-violet-500 dark:from-violet-400 dark:to-violet-300">Event Management</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <h3 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-violet-300 to-violet-400">Event Management</h3>
+              <p className="text-cyan-100 mb-6">
                 End-to-end event planning and execution services for corporate events, conferences, and workshops.
               </p>
               <Link 
                 href="/services#eventmanagement" 
-                className="text-violet-600 dark:text-violet-400 font-medium inline-flex items-center group"
+                className="text-violet-400 font-medium inline-flex items-center group"
               >
                 <span className="group-hover:underline">Learn more</span> 
                 <motion.span
@@ -664,28 +682,28 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 p-10 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-violet-500/20 backdrop-blur-sm relative overflow-hidden group"
+              className="bg-gradient-to-br from-violet-900/20 to-rose-900/20 p-10 rounded-2xl shadow-lg hover:shadow-xl transition-all border border-violet-800/30 backdrop-blur-sm relative overflow-hidden group"
             >
-              <div className="absolute -left-20 -bottom-20 w-40 h-40 bg-violet-500/10 rounded-full blur-2xl group-hover:bg-violet-500/20 transition-all duration-700"></div>
-              <div className="absolute right-5 bottom-5 text-violet-500/20">
+              <div className="absolute -left-20 -bottom-20 w-40 h-40 bg-violet-900/15 rounded-full blur-2xl group-hover:bg-violet-800/25 transition-all duration-700"></div>
+              <div className="absolute right-5 bottom-5 text-rose-800/20">
                 <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
               </div>
               <div className="flex items-center mb-6">
-                <div className="p-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-xl text-white mr-4">
+                <div className="p-3 bg-gradient-to-r from-violet-800 to-rose-800 rounded-xl text-white mr-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white bg-clip-text text-transparent bg-gradient-to-r from-violet-300 to-fuchsia-300">Want to join our team?</h3>
+                <h3 className="text-2xl font-bold text-white bg-clip-text text-transparent bg-gradient-to-r from-violet-300 to-rose-300">Want to join our team?</h3>
               </div>
               <p className="text-cyan-100 mb-8 ml-[52px]">
                 Explore career opportunities and be part of our creative journey.
               </p>
               <Link 
                 href="/careers" 
-                className="ml-[52px] group bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-700 hover:to-fuchsia-700 text-white px-6 py-3 rounded-full inline-flex items-center font-medium transition-all hover:shadow-lg hover:shadow-violet-500/30"
+                className="ml-[52px] group bg-gradient-to-r from-violet-800 to-rose-800 hover:from-violet-900 hover:to-rose-900 text-white px-6 py-3 rounded-full inline-flex items-center font-medium transition-all hover:shadow-lg hover:shadow-violet-800/30"
               >
                 View Openings
                 <svg xmlns="http://www.w3.org/2000/svg" className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
