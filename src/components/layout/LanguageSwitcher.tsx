@@ -13,6 +13,10 @@ export default function LanguageSwitcher() {
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'fr', name: 'Français', flag: '🇫🇷' },
     { code: 'es', name: 'Español', flag: '🇪🇸' },
+    { code: 'ja', name: '日本語', flag: '🇯🇵' },
+    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+    { code: 'zh', name: '中文', flag: '🇨🇳' },
     { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
     { code: 'ml', name: 'മലയാളം', flag: '🇮🇳' }
   ];
