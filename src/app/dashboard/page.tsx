@@ -2,10 +2,11 @@
 
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
+import { useUser, useClerk } from "@clerk/nextjs";
 
 export default function DashboardPage() {
   const { isLoaded, isSignedIn, user } = useUser();
+  const { openUserProfile } = useClerk();
   
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -107,12 +108,12 @@ export default function DashboardPage() {
                 )}
               </div>
               <div className="mt-6">
-                <a 
-                  href="https://polite-leopard-52.accounts.dev/user" 
+                <button 
+                  onClick={() => openUserProfile()}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md inline-flex items-center justify-center font-medium transition-colors"
                 >
                   Account Settings
-                </a>
+                </button>
               </div>
             </div>
           </div>

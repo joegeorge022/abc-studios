@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, LogIn, UserPlus, User, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { useClerk } from "@clerk/nextjs";
 import UserWrapper from "./UserWrapper";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/utils/languageContext";
@@ -14,6 +15,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { translations } = useLanguage();
+  const mobileUserButtonRef = useRef<HTMLDivElement>(null);
+  const { signOut } = useClerk();
   
   const userProfileUrl = process.env.NEXT_PUBLIC_CLERK_USER_PROFILE || "https://polite-leopard-52.accounts.dev/user";
 
@@ -35,6 +38,15 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleUserSectionClick = () => {
+    if (mobileUserButtonRef.current) {
+      const userButtonElement = mobileUserButtonRef.current.querySelector("button");
+      if (userButtonElement) {
+        userButtonElement.click();
+      }
+    }
+  };
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/95 dark:bg-black/95 shadow-md backdrop-blur-sm" : "bg-transparent"}`}>
@@ -145,16 +157,25 @@ export default function Navbar() {
                 <UserWrapper>
                   {({ isLoaded, isSignedIn, user }) => (
                     <>
-                      <div className="flex items-center justify-between px-4 py-3">
-                        <div className="flex items-center">
-                          <UserButton appearance={{
-                            elements: {
-                              userButtonAvatarBox: "w-8 h-8"
-                            }
-                          }} />
-                          <span className="ml-2 text-gray-800 dark:text-white">{isLoaded && user?.fullName}</span>
+                      <div 
+                        className="flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors rounded-md"
+                        onClick={handleUserSectionClick}
+                        ref={mobileUserButtonRef}
+                      >
+                        <div>
+                          <UserButton 
+                            appearance={{
+                              elements: {
+                                userButtonAvatarBox: "w-8 h-8"
+                              }
+                            }}
+                          />
                         </div>
+                        <span className="ml-2 text-gray-800 dark:text-white">
+                          {isLoaded && user?.fullName}
+                        </span>
                       </div>
+                      
                       <Link
                         href="/dashboard"
                         className="flex items-center px-4 py-3 rounded-md text-base font-medium text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -163,6 +184,17 @@ export default function Navbar() {
                         <User className="w-5 h-5 mr-2" />
                         {translations['nav.dashboard'] || 'Dashboard'}
                       </Link>
+                      
+                      <button
+                        className="flex items-center px-4 py-3 w-full text-left rounded-md text-base font-medium text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        onClick={() => {
+                          signOut();
+                          setIsOpen(false);
+                        }}
+                      >
+                        <LogOut className="w-5 h-5 mr-2" />
+                        {translations['nav.signOut'] || 'Sign Out'}
+                      </button>
                     </>
                   )}
                 </UserWrapper>
