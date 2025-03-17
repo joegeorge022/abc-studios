@@ -64,3 +64,6 @@ Thumbs.db
 /temp/
 
 .github/workflows/.cache/
+
+# clerk configuration (can include secrets)
+/.clerk/

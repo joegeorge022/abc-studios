@@ -115,6 +115,21 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+        
+        <div className="border-t border-gray-800 mt-6 pt-6 text-center">
+          <p className="text-sm text-gray-500 flex items-center justify-center gap-1">
+            <span>Designed & Developed by</span>
+            <a 
+              href="https://github.com/joegeorge022" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 transition-colors font-medium inline-flex items-center"
+              aria-label="Joe George's GitHub"
+            >
+              Joe George
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );
