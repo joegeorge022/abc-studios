@@ -5,8 +5,10 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Send, Check, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import { submitContactForm } from "../../utils/supabase";
+import { useLanguage } from "@/utils/languageContext";
 
 export default function ContactPage() {
+  const { translations } = useLanguage();
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -75,9 +77,11 @@ export default function ContactPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              {translations['contact.hero.title'] || 'Contact Us'}
+            </h1>
             <p className="text-xl text-blue-100 mb-8">
-              Get in touch with our team for inquiries, quotes, or any questions
+              {translations['contact.hero.subtitle'] || 'Get in touch with our team for inquiries, quotes, or any questions'}
             </p>
           </motion.div>
         </div>

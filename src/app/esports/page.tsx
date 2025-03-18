@@ -21,6 +21,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 import { submitEsportsRegistration } from "../../utils/supabase";
 import VideoStream from '@/components/esports/VideoStream';
+import { useLanguage } from "@/utils/languageContext";
 
 type EsportsEvent = {
   id: string;
@@ -172,6 +173,7 @@ const esportsEvents: EsportsEvent[] = [
 ];
 
 export default function EsportsPage() {
+  const { translations } = useLanguage();
   const [expandedEvent, setExpandedEvent] = useState<string | null>(null);
   const [registrationEvent, setRegistrationEvent] = useState<EsportsEvent | null>(null);
   
@@ -296,17 +298,17 @@ export default function EsportsPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-24 md:pt-32 pb-16 md:pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+      <section className="relative pt-32 pb-20 bg-gradient-to-b from-purple-900 to-indigo-900 text-white">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero/esports-hero.jpg"
-            alt="ABC Esports"
+            alt="Esports Events"
             fill
             priority
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
+            sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/50" />
         </div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -315,24 +317,12 @@ export default function EsportsPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">ABC Esports</h1>
-            <p className="text-lg sm:text-xl text-blue-100 mb-6 md:mb-8 px-2">
-              Compete in our premier gaming tournaments and showcase your skills
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              {translations['esports.hero.title'] || 'Esports Events'}
+            </h1>
+            <p className="text-xl text-purple-100 mb-8">
+              {translations['esports.hero.subtitle'] || 'Upcoming tournaments, competitions, and gaming events'}
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 flex-wrap">
-              <a 
-                href="#upcoming-events" 
-                className="bg-white text-blue-900 hover:bg-blue-100 px-6 py-3 rounded-full inline-flex items-center justify-center font-medium transition-colors w-full sm:w-auto"
-              >
-                View Tournaments
-              </a>
-              <a 
-                href="#matchmaking" 
-                className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-6 py-3 rounded-full inline-flex items-center justify-center font-medium transition-colors w-full sm:w-auto"
-              >
-                Match Schedules
-              </a>
-            </div>
           </motion.div>
         </div>
       </section>

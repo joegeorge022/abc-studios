@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Briefcase, MapPin, Clock, ChevronDown, ChevronUp, Send, Check, File, User, Mail, Phone, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import { submitCareerApplication } from "../../utils/supabase";
+import { useLanguage } from "@/utils/languageContext";
 
 type JobPosting = {
   id: string;
@@ -117,6 +118,7 @@ const jobPostings: JobPosting[] = [
 ];
 
 export default function CareersPage() {
+  const { translations } = useLanguage();
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [applicationFormVisible, setApplicationFormVisible] = useState(false);
   const [selectedJobId, setSelectedJobId] = useState<string | null>(null);
@@ -240,9 +242,11 @@ export default function CareersPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Join Our Team</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              {translations['careers.hero.title'] || 'Join Our Team'}
+            </h1>
             <p className="text-xl text-blue-100 mb-8">
-              Explore career opportunities and be part of our creative journey
+              {translations['careers.hero.subtitle'] || 'Explore career opportunities at ABC Studios'}
             </p>
           </motion.div>
         </div>

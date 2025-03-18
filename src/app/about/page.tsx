@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage } from "@/utils/languageContext";
 
 const teamMembers = [
   {
@@ -44,6 +45,8 @@ const teamMembers = [
 ];
 
 export default function AboutPage() {
+  const { translations } = useLanguage();
+  
   return (
     <>
       {/* Hero Section */}
@@ -66,9 +69,11 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">About ABC Studios</h1>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
+              {translations['about.hero.title'] || 'About ABC Studios'}
+            </h1>
             <p className="text-lg md:text-xl text-blue-100 mb-6 md:mb-8">
-              The story behind our passion for media innovation and event excellence
+              {translations['about.hero.subtitle'] || 'The story behind our passion for media innovation and event excellence'}
             </p>
           </motion.div>
         </div>

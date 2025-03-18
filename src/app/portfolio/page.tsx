@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Eye, Link as LinkIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage } from "@/utils/languageContext";
 
 const categories = ["All", "Live Streaming", "Media Production"];
 
@@ -76,6 +77,7 @@ const projects: Project[] = [
 ];
 
 export default function PortfolioPage() {
+  const { translations } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -105,9 +107,11 @@ export default function PortfolioPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Portfolio</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              {translations['portfolio.hero.title'] || 'Our Portfolio'}
+            </h1>
             <p className="text-xl text-blue-100 mb-8">
-              Explore our recent projects and success stories
+              {translations['portfolio.hero.subtitle'] || 'Explore our latest work and successful projects'}
             </p>
           </motion.div>
         </div>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Search, Calendar, User, Tag, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/utils/languageContext";
 
 type BlogPost = {
   id: string;
@@ -119,14 +120,15 @@ const categories = [
 ];
 
 export default function BlogPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const { translations } = useLanguage();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
 
   const filteredPosts = blogPosts.filter((post) => {
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const matchesCategory = selectedCategory === "All Categories" || post.category === selectedCategory;
+    const matchesCategory = activeCategory === "All" || post.category === activeCategory;
     
     return matchesSearch && matchesCategory;
   });
@@ -138,7 +140,7 @@ export default function BlogPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero/blog-hero.jpg"
-            alt="Blog & Insights"
+            alt="Our Blog"
             fill
             priority
             sizes="100vw"
@@ -153,9 +155,11 @@ export default function BlogPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Blog & Insights</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              {translations['blog.hero.title'] || 'Our Blog'}
+            </h1>
             <p className="text-xl text-blue-100 mb-8">
-              Explore our latest articles, tips, and industry insights
+              {translations['blog.hero.subtitle'] || 'Insights, tips, and news from the world of media production'}
             </p>
           </motion.div>
         </div>
@@ -169,8 +173,8 @@ export default function BlogPage() {
               <input
                 type="text"
                 placeholder="Search articles..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
@@ -178,8 +182,8 @@ export default function BlogPage() {
             
             <div className="w-full md:w-auto">
               <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                value={activeCategory}
+                onChange={(e) => setActiveCategory(e.target.value)}
                 className="w-full md:w-auto px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
               >
                 {categories.map((category) => (
@@ -203,7 +207,7 @@ export default function BlogPage() {
                 Try adjusting your search or filter criteria
               </p>
               <button
-                onClick={() => { setSearchQuery(""); setSelectedCategory("All Categories"); }}
+                onClick={() => { setSearchTerm(""); setActiveCategory("All"); }}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
               >
                 Reset filters

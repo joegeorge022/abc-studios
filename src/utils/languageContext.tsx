@@ -52,6 +52,27 @@ const translationData: Record<LanguageOption, Translations> = {
     'footer.rights': 'All rights reserved',
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
+    
+    'about.hero.title': 'About ABC Studios',
+    'about.hero.subtitle': 'The story behind our passion for media innovation and event excellence',
+    
+    'services.hero.title': 'Our Services',
+    'services.hero.subtitle': 'Professional solutions for all your media needs',
+    
+    'contact.hero.title': 'Contact Us',
+    'contact.hero.subtitle': 'Get in touch with our team for inquiries, quotes, or any questions',
+    
+    'portfolio.hero.title': 'Our Portfolio',
+    'portfolio.hero.subtitle': 'Explore our latest work and successful projects',
+    
+    'blog.hero.title': 'Our Blog',
+    'blog.hero.subtitle': 'Insights, tips, and news from the world of media production',
+    
+    'careers.hero.title': 'Join Our Team',
+    'careers.hero.subtitle': 'Explore career opportunities at ABC Studios',
+    
+    'esports.hero.title': 'Esports at ABC Studios',
+    'esports.hero.subtitle': 'Tournaments, events, and gaming experiences',
   },
   fr: {
     'nav.home': 'Accueil',
@@ -90,6 +111,27 @@ const translationData: Record<LanguageOption, Translations> = {
     'footer.rights': 'Tous droits réservés',
     'footer.privacy': 'Politique de Confidentialité',
     'footer.terms': 'Conditions d\'Utilisation',
+    
+    'about.hero.title': 'À Propos d\'ABC Studios',
+    'about.hero.subtitle': 'L\'histoire derrière notre passion pour l\'innovation médiatique et l\'excellence événementielle',
+    
+    'services.hero.title': 'Nos Services',
+    'services.hero.subtitle': 'Solutions professionnelles pour tous vos besoins médiatiques',
+    
+    'contact.hero.title': 'Contactez-Nous',
+    'contact.hero.subtitle': 'Prenez contact avec notre équipe pour des demandes, des devis ou toute question',
+    
+    'portfolio.hero.title': 'Notre Portfolio',
+    'portfolio.hero.subtitle': 'Découvrez nos derniers travaux et projets réussis',
+    
+    'blog.hero.title': 'Notre Blog',
+    'blog.hero.subtitle': 'Informations, conseils et actualités du monde de la production médiatique',
+    
+    'careers.hero.title': 'Rejoignez Notre Équipe',
+    'careers.hero.subtitle': 'Explorez les opportunités de carrière chez ABC Studios',
+    
+    'esports.hero.title': 'Esports chez ABC Studios',
+    'esports.hero.subtitle': 'Tournois, événements et expériences de jeu',
   },
   es: {
     'nav.home': 'Inicio',
@@ -128,6 +170,27 @@ const translationData: Record<LanguageOption, Translations> = {
     'footer.rights': 'Todos los derechos reservados',
     'footer.privacy': 'Política de Privacidad',
     'footer.terms': 'Términos de Servicio',
+    
+    'about.hero.title': 'Sobre ABC Studios',
+    'about.hero.subtitle': 'La historia detrás de nuestra pasión por la innovación en medios y la excelencia en eventos',
+    
+    'services.hero.title': 'Nuestros Servicios',
+    'services.hero.subtitle': 'Soluciones profesionales para todas tus necesidades de medios',
+    
+    'contact.hero.title': 'Contáctanos',
+    'contact.hero.subtitle': 'Ponte en contacto con nuestro equipo para consultas, presupuestos o cualquier pregunta',
+    
+    'portfolio.hero.title': 'Nuestro Portafolio',
+    'portfolio.hero.subtitle': 'Explora nuestros últimos trabajos y proyectos exitosos',
+    
+    'blog.hero.title': 'Nuestro Blog',
+    'blog.hero.subtitle': 'Perspectivas, consejos y noticias del mundo de la producción de medios',
+    
+    'careers.hero.title': 'Únete a Nuestro Equipo',
+    'careers.hero.subtitle': 'Explora oportunidades profesionales en ABC Studios',
+    
+    'esports.hero.title': 'Esports en ABC Studios',
+    'esports.hero.subtitle': 'Torneos, eventos y experiencias de juego',
   },
   ja: {
     'nav.home': 'ホーム',
@@ -166,6 +229,27 @@ const translationData: Record<LanguageOption, Translations> = {
     'footer.rights': '全著作権所有',
     'footer.privacy': 'プライバシーポリシー',
     'footer.terms': '利用規約',
+    
+    'about.hero.title': 'ABC Studiosについて',
+    'about.hero.subtitle': 'メディア革新とイベント卓越性への情熱の背景にあるストーリー',
+    
+    'services.hero.title': '私たちのサービス',
+    'services.hero.subtitle': 'あらゆるメディアニーズに対するプロフェッショナルなソリューション',
+    
+    'contact.hero.title': 'お問い合わせ',
+    'contact.hero.subtitle': '問い合わせ、見積もり、質問のために私たちのチームにご連絡ください',
+    
+    'portfolio.hero.title': 'ポートフォリオ',
+    'portfolio.hero.subtitle': '最新の作品と成功したプロジェクトをご覧ください',
+    
+    'blog.hero.title': 'ブログ',
+    'blog.hero.subtitle': 'メディア制作の世界からの洞察、ヒント、ニュース',
+    
+    'careers.hero.title': 'チームに参加する',
+    'careers.hero.subtitle': 'ABC Studiosでのキャリア機会を探る',
+    
+    'esports.hero.title': 'ABC Studiosのeスポーツ',
+    'esports.hero.subtitle': 'トーナメント、イベント、ゲーム体験',
   },
   de: {
     'nav.home': 'Startseite',
@@ -204,6 +288,27 @@ const translationData: Record<LanguageOption, Translations> = {
     'footer.rights': 'Alle Rechte vorbehalten',
     'footer.privacy': 'Datenschutzrichtlinie',
     'footer.terms': 'Nutzungsbedingungen',
+    
+    'about.hero.title': 'Über ABC Studios',
+    'about.hero.subtitle': 'Die Geschichte hinter unserer Leidenschaft für Medieninnovation und Veranstaltungsexzellenz',
+    
+    'services.hero.title': 'Unsere Dienstleistungen',
+    'services.hero.subtitle': 'Professionelle Lösungen für alle Ihre Medienanforderungen',
+    
+    'contact.hero.title': 'Kontaktieren Sie Uns',
+    'contact.hero.subtitle': 'Nehmen Sie Kontakt mit unserem Team auf für Anfragen, Angebote oder Fragen',
+    
+    'portfolio.hero.title': 'Unser Portfolio',
+    'portfolio.hero.subtitle': 'Entdecken Sie unsere neuesten Arbeiten und erfolgreichen Projekte',
+    
+    'blog.hero.title': 'Unser Blog',
+    'blog.hero.subtitle': 'Einblicke, Tipps und Neuigkeiten aus der Welt der Medienproduktion',
+    
+    'careers.hero.title': 'Unserem Team Beitreten',
+    'careers.hero.subtitle': 'Erkunden Sie Karrieremöglichkeiten bei ABC Studios',
+    
+    'esports.hero.title': 'Esports bei ABC Studios',
+    'esports.hero.subtitle': 'Turniere, Veranstaltungen und Spielerlebnisse',
   },
   ru: {
     'nav.home': 'Главная',
@@ -242,6 +347,27 @@ const translationData: Record<LanguageOption, Translations> = {
     'footer.rights': 'Все права защищены',
     'footer.privacy': 'Политика конфиденциальности',
     'footer.terms': 'Условия использования',
+    
+    'about.hero.title': 'О компании ABC Studios',
+    'about.hero.subtitle': 'История, стоящая за нашей страстью к инновациям в медиа и превосходству в организации мероприятий',
+    
+    'services.hero.title': 'Наши Услуги',
+    'services.hero.subtitle': 'Профессиональные решения для всех ваших медиа-потребностей',
+    
+    'contact.hero.title': 'Свяжитесь с нами',
+    'contact.hero.subtitle': 'Обратитесь к нашей команде для запросов, предложений или любых вопросов',
+    
+    'portfolio.hero.title': 'Наше Портфолио',
+    'portfolio.hero.subtitle': 'Ознакомьтесь с нашими последними работами и успешными проектами',
+    
+    'blog.hero.title': 'Наш Блог',
+    'blog.hero.subtitle': 'Аналитика, советы и новости из мира медиапроизводства',
+    
+    'careers.hero.title': 'Присоединяйтесь к нашей команде',
+    'careers.hero.subtitle': 'Изучите возможности карьеры в ABC Studios',
+    
+    'esports.hero.title': 'Киберспорт в ABC Studios',
+    'esports.hero.subtitle': 'Турниры, мероприятия и игровой опыт',
   },
   zh: {
     'nav.home': '首页',
@@ -280,6 +406,27 @@ const translationData: Record<LanguageOption, Translations> = {
     'footer.rights': '版权所有',
     'footer.privacy': '隐私政策',
     'footer.terms': '服务条款',
+    
+    'about.hero.title': '关于 ABC Studios',
+    'about.hero.subtitle': '我们对媒体创新和活动卓越的热情背后的故事',
+    
+    'services.hero.title': '我们的服务',
+    'services.hero.subtitle': '满足您所有媒体需求的专业解决方案',
+    
+    'contact.hero.title': '联系我们',
+    'contact.hero.subtitle': '与我们的团队联系，了解咨询、报价或任何问题',
+    
+    'portfolio.hero.title': '我们的作品集',
+    'portfolio.hero.subtitle': '探索我们最新的工作和成功的项目',
+    
+    'blog.hero.title': '我们的博客',
+    'blog.hero.subtitle': '来自媒体制作世界的见解、技巧和新闻',
+    
+    'careers.hero.title': '加入我们的团队',
+    'careers.hero.subtitle': '探索 ABC Studios 的职业机会',
+    
+    'esports.hero.title': 'ABC Studios 的电子竞技',
+    'esports.hero.subtitle': '锦标赛、活动和游戏体验',
   },
   hi: {
     'nav.home': 'होम',
@@ -318,6 +465,27 @@ const translationData: Record<LanguageOption, Translations> = {
     'footer.rights': 'सर्वाधिकार सुरक्षित',
     'footer.privacy': 'गोपनीयता नीति',
     'footer.terms': 'सेवा की शर्तें',
+    
+    'about.hero.title': 'ABC Studios के बारे में',
+    'about.hero.subtitle': 'मीडिया नवाचार और इवेंट उत्कृष्टता के लिए हमारे जुनून के पीछे की कहानी',
+    
+    'services.hero.title': 'हमारी सेवाएं',
+    'services.hero.subtitle': 'आपकी सभी मीडिया जरूरतों के लिए पेशेवर समाधान',
+    
+    'contact.hero.title': 'संपर्क करें',
+    'contact.hero.subtitle': 'पूछताछ, कोटेशन, या किसी भी प्रश्न के लिए हमारी टीम से संपर्क करें',
+    
+    'portfolio.hero.title': 'हमारा पोर्टफोलियो',
+    'portfolio.hero.subtitle': 'हमारे नवीनतम कार्य और सफल परियोजनाओं का अन्वेषण करें',
+    
+    'blog.hero.title': 'हमारा ब्लॉग',
+    'blog.hero.subtitle': 'मीडिया प्रोडक्शन की दुनिया से अंतर्दृष्टि, युक्तियाँ और समाचार',
+    
+    'careers.hero.title': 'हमारी टीम से जुड़ें',
+    'careers.hero.subtitle': 'ABC Studios में करियर के अवसरों का पता लगाएं',
+    
+    'esports.hero.title': 'ABC Studios में ई-स्पोर्ट्स',
+    'esports.hero.subtitle': 'टूर्नामेंट, इवेंट्स और गेमिंग अनुभव',
   },
   ml: {
     'nav.home': 'ഹോം',
@@ -356,6 +524,27 @@ const translationData: Record<LanguageOption, Translations> = {
     'footer.rights': 'എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം',
     'footer.privacy': 'സ്വകാര്യതാ നയം',
     'footer.terms': 'സേവന നിബന്ധനകൾ',
+    
+    'about.hero.title': 'ABC Studios നെ കുറിച്ച്',
+    'about.hero.subtitle': 'മീഡിയ നവീകരണത്തിനും ഇവന്റ് മികവിനും വേണ്ടിയുള്ള ഞങ്ങളുടെ ആവേശത്തിന് പിന്നിലെ കഥ',
+    
+    'services.hero.title': 'ഞങ്ങളുടെ സേവനങ്ങൾ',
+    'services.hero.subtitle': 'നിങ്ങളുടെ എല്ലാ മീഡിയ ആവശ്യങ്ങൾക്കുമുള്ള പ്രൊഫഷണൽ പരിഹാരങ്ങൾ',
+    
+    'contact.hero.title': 'ബന്ധപ്പെടുക',
+    'contact.hero.subtitle': 'അന്വേഷണങ്ങൾ, കോട്ടുകൾ, അല്ലെങ്കിൽ ഏതെങ്കിലും ചോദ്യങ്ങൾ എന്നിവയ്ക്കായി ഞങ്ങളുടെ ടീമുമായി ബന്ധപ്പെടുക',
+    
+    'portfolio.hero.title': 'ഞങ്ങളുടെ പോർട്ട്ഫോളിയോ',
+    'portfolio.hero.subtitle': 'ഞങ്ങളുടെ ഏറ്റവും പുതിയ പ്രവർത്തനങ്ങളും വിജയകരമായ പ്രോജക്ടുകളും പര്യവേക്ഷണം ചെയ്യുക',
+    
+    'blog.hero.title': 'ഞങ്ങളുടെ ബ്ലോഗ്',
+    'blog.hero.subtitle': 'മീഡിയ പ്രൊഡക്ഷൻ ലോകത്തിൽ നിന്നുള്ള ഉൾക്കാഴ്ചകൾ, നുറുങ്ങുകൾ, വാർത്തകൾ',
+    
+    'careers.hero.title': 'ഞങ്ങളുടെ ടീമിൽ ചേരുക',
+    'careers.hero.subtitle': 'ABC Studios-ൽ കരിയർ അവസരങ്ങൾ പര്യവേക്ഷണം ചെയ്യുക',
+    
+    'esports.hero.title': 'ABC Studios-ൽ ഇ-സ്പോർട്സ്',
+    'esports.hero.subtitle': 'ടൂർണമെന്റുകൾ, ഇവന്റുകൾ, ഗെയിമിംഗ് അനുഭവങ്ങൾ',
   }
 };
 

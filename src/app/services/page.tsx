@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Link from "next/link";
 import { 
   Tv, 
@@ -11,6 +12,7 @@ import {
   ChevronRight 
 } from "lucide-react";
 import Image from "next/image";
+import { useLanguage } from "@/utils/languageContext";
 
 type ColorType = "blue" | "purple" | "indigo" | "teal";
 
@@ -129,10 +131,13 @@ const ColorClass: Record<ColorType, {
 };
 
 export default function ServicesPage() {
+  const { translations } = useLanguage();
+  const [activeService, setActiveService] = useState(services[0]);
+  
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-b from-blue-900 to-blue-800 text-white">
+      <section className="relative pt-32 pb-20 bg-gradient-to-b from-blue-900 to-indigo-900 text-white">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/hero/services-hero.jpg"
@@ -151,9 +156,11 @@ export default function ServicesPage() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Services</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              {translations['services.hero.title'] || 'Our Services'}
+            </h1>
             <p className="text-xl text-blue-100 mb-8">
-              Comprehensive media solutions tailored to your needs
+              {translations['services.hero.subtitle'] || 'Professional solutions for all your media needs'}
             </p>
           </motion.div>
         </div>
