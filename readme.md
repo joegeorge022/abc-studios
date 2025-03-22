@@ -39,7 +39,7 @@ ABC Studios is a comprehensive digital production platform that combines modern 
   </tr>
   <tr>
     <td><b>🖥️ Frontend</b></td>
-    <td>Next.js 14, React 18, TypeScript</td>
+    <td>Next.js 14, React 19, TypeScript</td>
   </tr>
   <tr>
     <td><b>✨ Animations</b></td>
@@ -80,7 +80,7 @@ ABC Studios is a comprehensive digital production platform that combines modern 
 ## 🌟 Key Features
 
 ### 🖥️ Modern Frontend
-- Next.js 14 with App Router and React 18
+- Next.js 14 with App Router and React 19
 - TypeScript for type safety
 - Server and Client Components
 
