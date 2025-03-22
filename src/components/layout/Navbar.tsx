@@ -166,7 +166,8 @@ export default function Navbar() {
                           <UserButton 
                             appearance={{
                               elements: {
-                                userButtonAvatarBox: "w-8 h-8"
+                                userButtonAvatarBox: "w-8 h-8",
+                                footer: "hidden"
                               }
                             }}
                           />
